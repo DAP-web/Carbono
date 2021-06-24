@@ -1,0 +1,144 @@
+body {
+    background-color:#e4b1a5 ;
+}
+
+.titulo {
+    color:59371c;
+    text-align: center;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: xx-large;
+    letter-spacing: 10pt;  
+}
+
+.inputDate{
+    display: none;
+}
+
+.eleccion, #opcionRemoverUsuarios{
+    padding: 15px;
+}
+
+#usersList-w3{
+    padding: 15px;
+}
+
+#cajaDashboard{
+    padding-left: 15px;
+}
+
+tr#trForTableUser, th#thforUsers, td#tdforTableUser{
+    text-align: center;
+}
+
+/* #cajaDashboard tr{
+    text-align: center;
+}
+
+#cajaDashboard th{
+    text-align: center;
+}
+
+#cajaDashboard td{
+    text-align: center;
+} */
+
+
+div#cajaDashboard table, tr#trForTableUser, th#thforUsers, td#tdforTableUser{
+    border-collapse: collapse;
+    width: 50%;
+}
+
+/* div table{
+    border-collapse: collapse;
+    width: 50%;
+}
+
+div tr{
+    border-collapse: collapse;
+    width: 50%;
+}
+
+div th{
+    border-collapse: collapse;
+    width: 50%;
+}
+
+div td{
+    border-collapse: collapse;
+    width: 50%; 
+}
+*/
+
+table#usersList-w3, th#thforUsers, td#tdforTableUser{
+    border-collapse: collapse;
+     padding: 5px;
+     text-align: center;
+     border-bottom: 1px solid black;
+     background-color:  #f0d0c1;
+ }
+
+/* div table{
+   border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    background-color:  #f0d0c1;
+}
+
+div td{
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    background-color:  #f0d0c1;
+}
+
+div th{
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    background-color:  #f0d0c1;
+} */
+
+/* div table td:hover {
+    color:59371c ;
+    padding-right: 30%;
+    padding-left: 30%; 
+    text-align: center;
+} */
+
+
+#cajaDashboard table th {
+    background-color: #CA8462;
+}
+
+
+#opcionRemoverUsuarios {
+    align-items: center;
+}
+
+#opcionRemoverUsuarios button {
+    color: black;
+    border: 2px solid black; 
+    width: 15%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 12px
+
+}
+
+#userToRemoveInput select {
+    color: black;
+    border: 2px solid black; 
+    width: 15%;
+    border-radius: 12px
+}
+
+#userToRemoveInput button {
+    color: black;
+    border: 2px solid black; 
+    width: 10%; 
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 12px
+}

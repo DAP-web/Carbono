@@ -1,0 +1,343 @@
+/*Estilo de la cajita en la que se entra la fecha*/
+#inputDate {
+    background-color: rgb(250, 250, 250);
+    text-align: right;
+}
+
+#saludo {
+    display: none;
+}
+
+/*Div que contiene a la fecha iterativa JS*/
+#boxMesIterativo{
+    /* border: 2px solid navy; */
+    display: none;
+    width: 100%;
+    /* background-color: #efb810; */
+}
+
+/*Propiedades del mes iterativo dentro del div anterior*/
+#mesIterativo{
+    text-align: center;
+    color: #59371c;
+}
+
+/*Dandole espacio a la cajita del input de la fecha*/
+.inputDate, #addElement, .containerToDo, .saludando, #container-Input-Eliminar {
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+#addElement {
+    display: none;
+}
+
+.closeButton {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #cc6600;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    right: -20px;
+}
+/*Estilo de la página */
+#headerI {
+    color:#59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: xx-large;
+}
+.inputDate{
+    color:#59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+input[type="text"] {
+  width: 15%;
+  padding: 5px 5px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  outline: none;
+}
+input[type="text"]:focus {
+  background-color:#59371c;
+}
+.button {
+    background-color: white;
+    border: none;
+    color: #050404;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px 1px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  .button {
+    background-color: white;
+    color:  #59371c;
+    border: 1px solid  #59371c;
+  }
+  .button:hover {
+    background-color: #59371c;
+    color: white;
+  }
+  .saludando {
+    color:white;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: x-large;
+  }
+/* Poninendo Task*/
+#boxMesIterativo {
+    color: #59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#titleTasks{
+    color: white;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+#taskToInputContainer{
+    color:#59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#priority, #userSelected{
+    background-color: white;
+    border: none;
+    color: #050404;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px 1px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+#priority, #userSelected{
+    background-color: white;
+    color:  #59371c;
+    border: 1px solid  #59371c;
+}
+
+#priority:hover, #userSelected:hover{
+    background-color: #59371c;
+    color: white;
+}
+
+#listTitle {
+    color:#59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: medium;
+}
+
+#credits{
+    color:white;
+    font-family: Garamond, serif; 
+}
+
+/*ESTILO DE LA NAVBAR A LA DERECHA INICIO*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(3, 155, 155);
+}
+
+a:hover {
+    color: rgba(249, 105, 14, 1);
+}
+
+ul {
+    list-style: none;
+}
+
+p {
+    font-size: 1.4rem;
+}
+
+img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+/* header */
+
+header {
+    width: 100%;
+    height: 5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.container {
+    width: 100%;
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.nav-brand {
+    width: 7rem;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.line1 {
+    width: 15px;
+    height: 3px;
+    margin: 5px 0;
+    background: linear-gradient(
+        135deg,
+        rgba(249, 105, 14, 1) 0%,
+        rgb(255, 255, 255) 100%
+    );
+}
+
+.line2 {
+    width: 30px;
+    height: 3px;
+    background: linear-gradient(
+        135deg,
+        rgba(249, 105, 14, 1) 0%,
+        rgb(255, 255, 255) 100%
+    );
+}
+
+.line3 {
+    width: 15px;
+    height: 3px;
+    margin: 5px 0;
+    margin-left: 15px;
+    background: linear-gradient(
+        135deg,
+        rgba(249, 105, 14, 1) 0%,
+        rgb(255, 255, 255) 100%
+    );
+}
+
+.burger-menu-icon {
+    cursor: pointer;
+    z-index: 999;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background: rgba(55, 55, 55, 0.5);
+    padding: 1.2rem;
+    border-radius: 0% 0% 0% 40%;
+}
+
+.profile-pic {
+    height: 9rem;
+    width: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 1.5rem 0;
+}
+
+.caption {
+    display: block;
+}
+
+.nav-list {
+    width: 24rem;
+    height: 100vh;
+    background-color: #222222;
+    position: fixed;
+    top: 0;
+    right: -26rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: start;
+    z-index: 998;
+    transition: all 650ms ease-in-out;
+}
+
+.nav-list.active {
+    right: 0;
+}
+
+.nav-item {
+    margin: 1.2rem 0;
+}
+
+.nav-link {
+    opacity: 0;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    color: #cecece;
+    letter-spacing: 1.5px;
+}
+
+.nav-link:hover {
+    color: rgba(249, 105, 14, 1);
+}
+
+.toggle {
+    background: none;
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px) scaleX(2);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px) scaleX(2);
+    margin-left: 0px;
+}
+
+@keyframes navLinkAnimate {
+    from {
+        opacity: 0;
+        transform: translate(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0px);
+    }
+}
+
+#userNavBar{
+    text-align: center;
+}
+
+/*ESTILO DE LA NAVBAR A LA DERECHA FIN*/
+

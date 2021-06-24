@@ -1,0 +1,106 @@
+body{
+    background-color: #663300;
+}
+
+h3{
+    font: 64px Garamond, sans-serif;
+    text-align: center;
+    color: rgb(199, 173, 151);
+}
+
+li{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font: 25px Garamond, sans-serif;
+    color: #ffffff;
+}
+
+.beneficiosW3{
+    padding: 20px;
+}
+
+.acercaW3{
+    padding: 25px;
+}
+
+.contacto{
+    padding-left: 19%;
+}
+
+#letGo{
+    padding-top: 10%;
+}
+
+a#back{
+    border-radius: 15px;
+    text-decoration: none;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: Garamond, sans-serif;
+    color: black;
+    background-color: #ffffff;
+    border: 3px double black;
+}
+
+.list{
+    text-decoration: none;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: Garamond, sans-serif;
+    color: #ffffff;
+}
+
+a#back:hover, a#toRepo:hover{
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+a#toRepo{
+    border-radius: 15px;
+    text-decoration: none;
+    padding: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font: 30px Garamond, sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: black;
+    border: 3px double #174972;
+}
+
+.list:hover{
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+.botonRegreso{
+    padding-left: 3%;
+}
+
+img#beneficiosIMG{
+    float: right;
+    width: 20%;
+    height: auto;
+    padding-right: 20%;
+}
+
+img#acercaIMG{
+    float: right;
+    width: 30%;
+    height: auto;
+    padding-right: 30%;
+}
+
+img#contactoIMG{
+    float: right;
+    width: 40%;
+    height: auto;
+    padding-right: 20%;
+}
+
+.botonRegresoDeC{
+    padding-left: 3%;
+    padding-top: 10%;
+}

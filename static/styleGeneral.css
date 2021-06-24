@@ -1,0 +1,18 @@
+body{
+    background-color:#e4b1a5 ;
+}
+
+/* header{
+    border: 2.5px solid navy;
+} */
+
+#headerI{
+    text-align: center;
+    color: navy;
+}
+
+#credits{
+    text-align: end;
+    padding-right: 15px;
+    color: navy;
+}
