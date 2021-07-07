@@ -21,20 +21,30 @@
 
         <form class="cuerpo" action="{{url_for('registration')}}" method="POST">
             <label for="correo_reg">Correo Electronico:</label><br>
-            <input type="email" name="correo_reg" id="correo_reg" placeholder="Ingrese su correo electronico...">
+            <input type="email" name="correo_reg" id="correo_reg" placeholder="Ingrese su correo electronico..."
+                required>
 
             <br><br>
 
             <label for="usuario_reg">Usuario:</label><br>
-            <input type="text" name="usuario_reg" id="usuario_reg" placeholder="Ingrese un nombre de usuario...">
+            <input type="text" name="usuario_reg" id="usuario_reg" placeholder="Ingrese un nombre de usuario..."
+                required>
             <br><br>
 
             <label for="contra_reg">Contraseña:</label><br>
-            <input type="password" name="contra_reg" id="contra_reg" placeholder="Ingrese una contraseña...">
+            <input type="password" name="contra_reg" id="contra_reg" placeholder="Ingrese una contraseña..." required>
             <br><br>
 
             <label for="contraConf_reg">Confirmar contraseña:</label><br>
-            <input type="password" name="contraConf_reg" id="contraConf_reg" placeholder="Confirme su contraseña...">
+            <input type="password" name="contraConf_reg" id="contraConf_reg" placeholder="Confirme su contraseña..."
+                required>
+            <br><br>
+
+            <label for="adminORClient">¿Eres el PM de tu equipo?</label><br>
+            <select name="adminORClient" id="adminORClient" required>
+                <option value="0">No</option>
+                <option value="1">Si</option>
+            </select>
             <br><br>
 
             <input type="submit" value="Registrarse" class="button">
