@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from flask_cors import CORS, cross_origin
 import bcrypt
+import requests
 from logic.userLogic import UserLogic
 
 app = Flask(__name__)
@@ -13,7 +14,38 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    data = {}
+    if request.method == "GET"
     return render_template("login.html")
+    elif request.method == "POST"
+        """validaciones de recaptha y base de datos"""
+        data["secret"] = "6LeAdQcbAAAAAGNn732kkStupieUDdKjQTl38KL_"
+        data["response"] = request.form["g-recaptcha-response"]
+        response = requests.post(
+            "https://www.google.com/recaptcha/api/siteverify", params=data
+        )
+        if response.status_code == 200:
+            messageJson = response.json()
+            if messageJson["success"]:
+                """VALIDACIÓN"""
+                logic = UserLogic()
+                email = request.form["email"]
+                passwd = request.form["passw"]
+                userDict = logic.getUserByEmail(email)
+                salt = userDict["salt"].encode("utf-8")
+                hashPasswd = bcrypt.hashpw(passwd.encode("utf-8"), salt)
+                dbPasswd = userDict["password"].encode("utf-8")
+                if hashPasswd == dbPasswd:
+                    """SESIÓN"""
+                    session["login_user"] = email
+                    session["loggedIn"] = True
+                    return redirect("dashboard")
+                else:
+                    return redirect("login")
+            else:
+                return redirect("login")
+        else:
+            return redirect("login")
 
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
