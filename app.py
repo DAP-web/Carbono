@@ -18,7 +18,7 @@ def login():
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
     if request.method == "GET":
-        return render_template("register.html")
+        return render_template("registration.html")
     elif request.method == "POST":
         logic = UserLogic()
 
@@ -35,13 +35,15 @@ def registration():
             hashpswd = bcrypt.hashpw(epswd, salt)
 
             strSalt = salt.decode("utf-8")
-            strPswd = hashpswd.decode("utf-8")
+            strPswd = hashpswd.decode("utf-8")            
 
             rows = logic.insertUser(username, email, strPswd, strSalt, admin)
+            print("Rows affected:", rows, sep = " ")
 
             return redirect("login")
         else:
-            return redirect("register")
+            message = "Las contraseñas no coinciden. Verifique y vuelva a intentar."
+            return redirect("registration", message = message)
 
 @app.route("/dashboard1")
 def dashboard1():
