@@ -4,10 +4,6 @@
     text-align: right;
 }
 
-#saludo {
-    display: none;
-}
-
 /*Div que contiene a la fecha iterativa JS*/
 #boxMesIterativo{
     /* border: 2px solid navy; */
@@ -55,6 +51,10 @@
     font-size: large;
 }
 
+input#inputDate {
+    padding-right: 20px;
+}
+
 input[type="text"] {
   width: 15%;
   padding: 5px 5px;
@@ -63,6 +63,7 @@ input[type="text"] {
   border: 1px solid #555;
   outline: none;
 }
+
 input[type="text"]:focus {
   background-color:#59371c;
 }

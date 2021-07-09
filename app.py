@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 import bcrypt
 import requests
 from logic.userLogic import UserLogic
+from logic.tasksLogic import TaskLogic
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -48,13 +49,34 @@ def login():
                     session["login_user_email"] = email
                     session["login_user_name"] = userDict["username"]
                     session["loggedIn"] = True
-                    return redirect("dashboard")
+                    print(userDict["admin"])
+                    if userDict["admin"] == 0:
+                        print("cliente -> calendar")
+                        return redirect("calendar")
+                    elif userDict["admin"] == 1:
+                        print("admin -> dashboard")
+                        return redirect("dashboard")
+                    else:
+                        print("Algo anda mal papi!")
+                        return redirect("dashboard")
                 else:
                     return redirect("login")
             else:
                 return redirect("login")
         else:
             return redirect("login")
+
+@app.route("/logout")
+def logout():
+    if session.get("loggedIn"):
+        session.pop("login_user_id")
+        session.pop("login_user_email")
+        session.pop("login_user_name")
+        session.pop("loggedIn")
+        print("Session removed!")
+        return redirect("login")
+    else:
+        return redirect("login")
 
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
@@ -96,7 +118,19 @@ def dashboard():
 
 @app.route("/calendar")
 def calendar():
-    return render_template("calendar.html")
+    if session.get("loggedIn"):
+        logic = TaskLogic()
+
+        print("Found a session!")
+        userid = session.get("login_user_id")
+        username = session.get("login_user_name")
+
+        usersTasks = logic.getAllTasksByUser(userid)
+        
+        return render_template("calendar.html", userid=userid, username=username, tasks = usersTasks)
+    else:
+        print("Didn't find a session. Redirecting to Login!")
+        return redirect("login")
 
 @app.route("/todolist")
 def todolist():

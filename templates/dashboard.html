@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 	<title>Calendar || ADMIN</title>
@@ -10,139 +11,139 @@
 	<link rel="stylesheet" type="text/css" href="/static/styleCalendar_Template.css" />
 	<link rel="stylesheet" type="text/css" href="/static/styleDashboard.css" />
 	<link rel="shortcut icon" href="/static/images/calendarImageLogo.png" />
-	
+
 </head>
+
 <body>
-<header>
-	<div class="container">
-		<nav>
-			<div class="burger-menu-icon">
-				<div class="line1"></div>
-				<div class="line2"></div>
-				<div class="line3"></div>
-			</div>
-			<ul class="nav-list">
-				<li class="nav-item">
-					<a href="">
-						<img src="/static/images/perfil.jpeg" alt="Logo" class="profile-pic nav-link" />
-						<span class="caption nav-link" id="userNavBar">Username</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="" class="nav-link" id="emailNavBar">E-mail</a>
-				</li>
-				<li class="nav-item">
-					<a href="/login" onclick="logOfSession()" class="nav-link">Log off</a>
-				</li>
-				<li class="nav-item">
-					<a href="" target="_blank" class="nav-link">
-						<i class="fab fa-youtube"></i>
-					</a>
-					<a href="" target="_blank" class="nav-link">
-						<i class="fab fa-dev"></i>
-					</a>
-					<a href="" target="_blank" class="nav-link">
-						<i class="fab fa-twitter"></i>
-					</a>
-				</li>
-				<div class="cta">
-					<a href="#" target="_blank" class="btn nav-link">Let's keep working!</a>
-					
+	<header>
+		<div class="container">
+			<nav>
+				<div class="burger-menu-icon">
+					<div class="line1"></div>
+					<div class="line2"></div>
+					<div class="line3"></div>
 				</div>
-			</ul>
-		</nav>
-	</div>
-</header>
+				<ul class="nav-list">
+					<li class="nav-item">
+						<a href="">
+							<img src="/static/images/perfil.jpeg" alt="Logo" class="profile-pic nav-link" />
+							<span class="caption nav-link" id="userNavBar">Username</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="" class="nav-link" id="emailNavBar">E-mail</a>
+					</li>
+					<li class="nav-item">
+						<a href="/login" onclick="{{url_for('logout')}}" class="nav-link">Log off</a>
+					</li>
+					<li class="nav-item">
+						<a href="" target="_blank" class="nav-link">
+							<i class="fab fa-youtube"></i>
+						</a>
+						<a href="" target="_blank" class="nav-link">
+							<i class="fab fa-dev"></i>
+						</a>
+						<a href="" target="_blank" class="nav-link">
+							<i class="fab fa-twitter"></i>
+						</a>
+					</li>
+					<div class="cta">
+						<a href="#" target="_blank" class="btn nav-link">Let's keep working!</a>
 
-<br><br>
+					</div>
+				</ul>
+			</nav>
+		</div>
+	</header>
 
-<h1 id="headerI">Calendar || To-Do List</h1>
+	<br><br>
 
-<br>
+	<h1 id="headerI">Calendar || To-Do List</h1>
 
-<div class="saludando">
-	<h2 id="saludo"></h2>
-</div>
-
-<div class="eleccion">
-	<button class="button" onclick="peakUsers()">Peak users</button>
-	<button class="button" onclick="peakTasks()">Peak tasks</button>
-</div>
-
-<div class="inputDate" id="input-Date-Box-Hidden">
-	<label for="inputDate">Pick a date:</label><br>
-	<div><input type="text" name="date" class="tcal" value="" id="inputDate" autocomplete="off" /></div>
 	<br>
-	<button class="button" onclick="selectMonth()">Submit</button>
-</div>
 
-<div id="boxMesIterativo">
-	<h2 id="mesIterativo"></h2>
-</div>
-
-<br>
-
-<div id="addElement">
-	<div id="titleContainer">
-		<h2 id="titleTasks">ENTER YOUR TASKS HERE:</h2>
-	</div><br>
-
-	<div id="taskToInputContainer">
-		<label for="userSelected">User:</label><br>
-		<select name="userSelected" id="userSelected">
-		</select>
-		<br><br>
-		<label for="task">Task:</label><br>
-		<input type="text" id="task" name="task" value="" autocomplete="off" />
-		<br><br>
-		<label for="priority">Set priority:</label><br>
-		<select name="priority" id="priority">
-			<option value="Baja">Baja</option>
-			<option value="Media">Media</option>
-			<option value="Alta">Alta</option>
-		</select><br><br>
-		<button class="button" onclick="checkTaskAdmin()">Add Task</button>
+	<div class="saludando">
+		<h2 id="saludo"></h2>
 	</div>
-</div>
-<br>
-<!-- Aqui ira la lista todo con el w3includes -->
-<div class="containerToDo">
-	<div style="display: none;" id="listToDo" name="w3includes"
-	  w3-include-html="/todolist"></div>
 
-</div>
-
-<div class="containerDash">
-	<div style="display: none;" id="listUsers" name="w3includes"
-	w3-include-html="/dashboard1"></div>
-</div>
-
-<div id="opcionRemoverUsuarios" style="display: none;">
-	<button onclick='listUsersToDelete()'>REMOVE USER</button>
-</div>
-
-<div id="container-Input-Eliminar" style="display: none;">
-	<div id="titleContainerIE">
-		<h2 id="titleTasks3">USER TO REMOVE:</h2>
-	</div><br>
-
-	<div id="userToRemoveInput">
-		<label for="user">Pick the user you wish to remove:</label><br>
-		<select name="user" id="user">
-			
-		</select><br><br>
-		<button onclick="deleteUserCliente()">Remove user</button>
+	<div class="eleccion">
+		<button class="button" onclick="peakUsers()">Peak users</button>
+		<button class="button" onclick="peakTasks()">Peak tasks</button>
 	</div>
-</div>
 
-<footer>
-	<h4 id="credits">By Carbono 06</h4>
-</footer>
+	<div class="inputDate" id="input-Date-Box-Hidden">
+		<label for="inputDate">Pick a date:</label><br>
+		<div><input type="text" name="date" class="tcal" value="" id="inputDate" autocomplete="off" /></div>
+		<br>
+		<button class="button" onclick="selectMonth()">Submit</button>
+	</div>
 
-<script src="https://www.w3schools.com/lib/w3.js"></script>
-<script type="text/javascript" src="/static/scriptCalendar_Template.js"></script>
-<script src="/static/scriptCalendar.js"></script>
-<script src="/static/scriptDashboard.js"></script>
+	<div id="boxMesIterativo">
+		<h2 id="mesIterativo"></h2>
+	</div>
+
+	<br>
+
+	<div id="addElement">
+		<div id="titleContainer">
+			<h2 id="titleTasks">ENTER YOUR TASKS HERE:</h2>
+		</div><br>
+
+		<div id="taskToInputContainer">
+			<label for="userSelected">User:</label><br>
+			<select name="userSelected" id="userSelected">
+			</select>
+			<br><br>
+			<label for="task">Task:</label><br>
+			<input type="text" id="task" name="task" value="" autocomplete="off" />
+			<br><br>
+			<label for="priority">Set priority:</label><br>
+			<select name="priority" id="priority">
+				<option value="Baja">Baja</option>
+				<option value="Media">Media</option>
+				<option value="Alta">Alta</option>
+			</select><br><br>
+			<button class="button" onclick="checkTaskAdmin()">Add Task</button>
+		</div>
+	</div>
+	<br>
+	<!-- Aqui ira la lista todo con el w3includes -->
+	<div class="containerToDo">
+		<div style="display: none;" id="listToDo" name="w3includes" w3-include-html="/todolist"></div>
+
+	</div>
+
+	<div class="containerDash">
+		<div style="display: none;" id="listUsers" name="w3includes" w3-include-html="/dashboard1"></div>
+	</div>
+
+	<div id="opcionRemoverUsuarios" style="display: none;">
+		<button onclick='listUsersToDelete()'>REMOVE USER</button>
+	</div>
+
+	<div id="container-Input-Eliminar" style="display: none;">
+		<div id="titleContainerIE">
+			<h2 id="titleTasks3">USER TO REMOVE:</h2>
+		</div><br>
+
+		<div id="userToRemoveInput">
+			<label for="user">Pick the user you wish to remove:</label><br>
+			<select name="user" id="user">
+
+			</select><br><br>
+			<button onclick="deleteUserCliente()">Remove user</button>
+		</div>
+	</div>
+
+	<footer>
+		<h4 id="credits">By Carbono 06</h4>
+	</footer>
+
+	<script src="https://www.w3schools.com/lib/w3.js"></script>
+	<script type="text/javascript" src="/static/scriptCalendar_Template.js"></script>
+	<script src="/static/scriptCalendar.js"></script>
+	<script src="/static/scriptDashboard.js"></script>
 
 </body>
+
 </html>
