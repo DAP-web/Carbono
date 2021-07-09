@@ -7,6 +7,7 @@ from logic.userLogic import UserLogic
 app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
+app.secret_key = "B4DB7NN7B4B7"
 
 @app.route("/")
 def home():
@@ -14,18 +15,24 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    data = {}
-    if request.method == "GET"
-    return render_template("login.html")
-    elif request.method == "POST"
+    if request.method == "GET":
+        return render_template("login.html")
+    elif request.method == "POST":
         """validaciones de recaptha y base de datos"""
-        data["secret"] = "6LeAdQcbAAAAAGNn732kkStupieUDdKjQTl38KL_"
-        data["response"] = request.form["g-recaptcha-response"]
+        data = {
+            "secret": "6LdRpTIbAAAAANFNF3qMLkGENIHmwPHORK_nY2Dw",
+            "response": request.form["g-recaptcha-response"]
+        }
+
         response = requests.post(
-            "https://www.google.com/recaptcha/api/siteverify", params=data
+            "https://www.google.com/recaptcha/api/siteverify",
+            params = data
         )
+
         if response.status_code == 200:
             messageJson = response.json()
+            print(messageJson)
+
             if messageJson["success"]:
                 """VALIDACIÓN"""
                 logic = UserLogic()
@@ -37,7 +44,9 @@ def login():
                 dbPasswd = userDict["password"].encode("utf-8")
                 if hashPasswd == dbPasswd:
                     """SESIÓN"""
-                    session["login_user"] = email
+                    session["login_user_id"] = userDict["userid"]
+                    session["login_user_email"] = email
+                    session["login_user_name"] = userDict["username"]
                     session["loggedIn"] = True
                     return redirect("dashboard")
                 else:

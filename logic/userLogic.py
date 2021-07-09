@@ -24,11 +24,11 @@ class UserLogic(PybaLogic):
         return rows
 
     def getUserByEmail(self, email):
-        database = self.databaseObj()
-        sql = (
-            "SELECT email, password, salt "
-            + f"FROM carbonodb where email like '{email}';"
-        )
+        database = self.databaseObj
+        sql = (f"""
+            SELECT userid, username, email, password, salt, admin 
+            FROM carbonodb.user where `email` like '{email}';
+            """)
         result = database.executeQuery(sql)
         if len(result) > 0:
             return result[0]
