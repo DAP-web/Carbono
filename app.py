@@ -120,7 +120,6 @@ def dashboard():
 def calendar():
     if session.get("loggedIn"):
         logic = TaskLogic()
-
         print("Found a session!")
         userid = session.get("login_user_id")
         username = session.get("login_user_name")
@@ -131,6 +130,12 @@ def calendar():
     else:
         print("Didn't find a session. Redirecting to Login!")
         return redirect("login")
+
+@app.route("/addtask")
+def addTask():
+    logic = TaskLogic()
+    userid = session.get("login_user_id")
+    return redirect('calendar')
 
 @app.route("/todolist")
 def todolist():

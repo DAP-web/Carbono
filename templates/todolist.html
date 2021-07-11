@@ -5,6 +5,15 @@
     <br>
     <div id="listTitle">
         <ul id="lista">
+            {% if username %}
+            {% for task in tasks %}
+                {% if task['date'] == 'x' %}
+                    {% set i = 1 %}
+                    <li>Task {{i}}: {{task}}</li>
+                    {%set i = i + 1%}
+                {% endif %}
+            {% endfor %}
+            {% endif %}
         </ul>
     </div>
 </div>
