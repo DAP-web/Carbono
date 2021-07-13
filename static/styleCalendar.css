@@ -24,6 +24,10 @@
     padding-top: 10px;
 }
 
+#titleContainer, #brb{
+    padding-left: 15px;
+}
+
 #addElement {
     display: none;
 }

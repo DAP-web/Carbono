@@ -123,23 +123,48 @@ def calendar():
         print("Found a session!")
         userid = session.get("login_user_id")
         username = session.get("login_user_name")
-
-        usersTasks = logic.getAllTasksByUser(userid)
         
-        return render_template("calendar.html", userid=userid, username=username, tasks = usersTasks)
+        return render_template("calendar.html", userid=userid, username=username)
     else:
         print("Didn't find a session. Redirecting to Login!")
         return redirect("login")
 
 @app.route("/addtask")
-def addTask():
+def addtask():
+    userid = session.get("login_user_id")
+    username = session.get("login_user_name")
+
+    print("Redirected", username, "to add a task.", sep=" ")
+    return render_template("addtask.html", userid=userid, username=username)
+
+@app.route("/addtaskbd", methods=["GET", "POST"])
+def addtasktoBD():
     logic = TaskLogic()
     userid = session.get("login_user_id")
-    return redirect('calendar')
+    username = session.get("login_user_name")
+    
+    if request.method == "GET":
+        return redirect('addtask')
+    elif request.method == "POST":
+        date = request.form["date"]
+        task = request.form["task"]
+        priority = request.form["priority"]
+
+        rows = logic.insertTask(userid, date, task, priority, 0)
+        print(f"Rows affected: {rows}","Task for", username, "added")
+        return redirect('addtask')
 
 @app.route("/todolist")
 def todolist():
+    tasks = logic.getAllTasksByUser(userid)
+    print('fuck yeah')
     return render_template("todolist.html")
+
+@app.route("/peakTasksClient", methods=["GET", "POST"])
+def peakTasksClient():
+    print('reached here')
+    return redirect('todolist')
+
 
 @app.route("/beneficios")
 def beneficios():
