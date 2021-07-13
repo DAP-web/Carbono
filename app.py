@@ -156,14 +156,36 @@ def addtasktoBD():
 
 @app.route("/todolist")
 def todolist():
-    tasks = logic.getAllTasksByUser(userid)
-    print('fuck yeah')
-    return render_template("todolist.html")
+    userid = session.get("login_user_id")
+    username = session.get("login_user_name")
+    dateTasks = []
+
+    print("Redirected", username, "to peak tasks.", sep=" ")
+    return render_template("todolist.html", userid=userid, username=username, tasks = dateTasks)
 
 @app.route("/peakTasksClient", methods=["GET", "POST"])
 def peakTasksClient():
-    print('reached here')
-    return redirect('todolist')
+    if request.method == "GET":
+        return redirect("todolist")
+    elif request.method == "POST":
+        logic = TaskLogic()
+        userid = session.get("login_user_id")
+        username = session.get("login_user_name")
+        tasks = logic.getAllTasksByUser(userid)
+        dateTasks = []
+
+        date = request.form["date"]
+        print(date)
+
+        for task in tasks:
+            if date == str(task["date"]):
+                dateTasks.append(task)
+            else:
+                continue
+        print(dateTasks)
+        return render_template("todolist.html", userid=userid, username=username, tasks=dateTasks)    
+    else:
+        return redirect('todolist')
 
 
 @app.route("/beneficios")
