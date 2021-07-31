@@ -6,7 +6,7 @@ class TaskLogic(PybaLogic):
 
     def getAllTasksByUser(self, userid):
         database = self.createDatabaseObj()
-        sql = f"select * from carbonodb.tasks where userid=1 order by priority asc;"
+        sql = f"select * from carbonodb.tasks where userid={userid} order by priority asc;"
         result = database.executeQuery(sql)
         return result
 
