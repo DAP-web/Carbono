@@ -9,12 +9,21 @@ body {
     background-color: #6200EA
 }
 
+<<<<<<< HEAD
 i {
     font-style: italic
 }
 
 .container {
     margin-top: 100px
+=======
+/*Div que contiene a la fecha iterativa JS*/
+#boxMesIterativo{
+    /* border: 2px solid navy; */
+    display: none;
+    width: 100%;
+    /* background-color: #efb810; */
+>>>>>>> de23fb684a2a94c6876eb4a08552cfdb300253af
 }
 
 .card {
@@ -27,6 +36,7 @@ i {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0
 }
 
+<<<<<<< HEAD
 .card-header {
     display: flex;
     align-items: center;
@@ -41,6 +51,162 @@ i {
 .widget-subheading {
     color: #858a8e;
     font-size: 10px
+=======
+#titleContainer, #brb{
+    padding-left: 15px;
+}
+
+#addElement {
+    display: none;
+}
+
+.closeButton {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #cc6600;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    right: -20px;
+}
+/*Estilo de la página */
+#headerI {
+    color:#59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: xx-large;
+}
+.inputDate{
+    color:#59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+input#inputDate {
+    padding-right: 20px;
+}
+
+input[type="text"] {
+  width: 15%;
+  padding: 5px 5px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  background-color:#59371c;
+}
+.button {
+    background-color: white;
+    border: none;
+    color: #050404;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px 1px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  .button {
+    background-color: white;
+    color:  #59371c;
+    border: 1px solid  #59371c;
+  }
+  .button:hover {
+    background-color: #59371c;
+    color: white;
+  }
+  .saludando {
+    color:white;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: x-large;
+  }
+/* Poninendo Task*/
+#boxMesIterativo {
+    color: #59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#titleTasks{
+    color: white;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+#taskToInputContainer{
+    color:#59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+#priority, #userSelected{
+    background-color: white;
+    border: none;
+    color: #050404;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px 1px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+#priority, #userSelected{
+    background-color: white;
+    color:  #59371c;
+    border: 1px solid  #59371c;
+}
+
+#priority:hover, #userSelected:hover{
+    background-color: #59371c;
+    color: white;
+}
+
+#listTitle {
+    color:#59371c;
+    font-family: Garamond, serif;
+    font-weight: bold;
+    font-size: medium;
+}
+
+#credits{
+    color:white;
+    font-family: Garamond, serif; 
+}
+
+/*ESTILO DE LA NAVBAR A LA DERECHA INICIO*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(3, 155, 155);
+}
+
+a:hover {
+    color: rgba(249, 105, 14, 1);
+}
+
+ul {
+    list-style: none;
+>>>>>>> de23fb684a2a94c6876eb4a08552cfdb300253af
 }
 
 .card-header.card-header-tab .card-header-title {

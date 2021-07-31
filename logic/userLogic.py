@@ -16,12 +16,23 @@ class UserLogic(PybaLogic):
         sql = (
             f"""
             INSERT INTO `carbonodb`.`user` (`username`, `email`, `password`,`salt`, `admin`) 
-            VALUES ('{user["username"]}', '{user["useremail"]}m', '{user["password"]}', '{user["salt"]}',
-            '{user["admin"]}' ;
-            
+            VALUES ('{user["username"]}', '{user["useremail"]}', '{user["password"]}', '{user["salt"]}',
+            '{user["admin"]}');
             """
         )
         rows = database.executeNonQueryRows(sql)
         return rows
+
+    def getUserByEmail(self, email):
+        database = self.databaseObj
+        sql = (f"""
+            SELECT userid, username, email, password, salt, admin 
+            FROM carbonodb.user where `email` like '{email}';
+            """)
+        result = database.executeQuery(sql)
+        if len(result) > 0:
+            return result[0]
+        else:
+            return []
 
     

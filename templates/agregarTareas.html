@@ -3,13 +3,12 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<title>Calendar || ADMIN</title>
+	<title>Calendar</title>
 
 	<!-- link calendar resources -->
 	<link rel="stylesheet" type="text/css" href="/static/styleGeneral.css" />
 	<link rel="stylesheet" type="text/css" href="/static/styleCalendar.css" />
 	<link rel="stylesheet" type="text/css" href="/static/styleCalendar_Template.css" />
-	<link rel="stylesheet" type="text/css" href="/static/styleDashboard.css" />
 	<link rel="shortcut icon" href="/static/images/calendarImageLogo.png" />
 
 </head>
@@ -27,6 +26,7 @@
 					<li class="nav-item">
 						<a href="">
 							<img src="/static/images/perfil.jpeg" alt="Logo" class="profile-pic nav-link" />
+							<br>
 							<span class="caption nav-link" id="userNavBar">Username</span>
 						</a>
 					</li>
@@ -34,7 +34,7 @@
 						<a href="" class="nav-link" id="emailNavBar">E-mail</a>
 					</li>
 					<li class="nav-item">
-						<a href="/login" onclick="{{url_for('logout')}}" class="nav-link">Log off</a>
+						<a href="{{url_for('logout')}}" class="nav-link">Log off</a>
 					</li>
 					<li class="nav-item">
 						<a href="" target="_blank" class="nav-link">
@@ -62,38 +62,14 @@
 
 	<br>
 
-	<div class="saludando">
-		<h2 id="saludo"></h2>
-	</div>
-
-	<div class="eleccion">
-		<button class="button" onclick="peakUsers()">Peak users</button>
-		<button class="button" onclick="peakTasks()">Peak tasks</button>
-	</div>
-
-	<div class="inputDate" id="input-Date-Box-Hidden">
-		<label for="inputDate">Pick a date:</label><br>
-		<div><input type="text" name="date" class="tcal" value="" id="inputDate" autocomplete="off" /></div>
-		<br>
-		<button class="button" onclick="selectMonth()">Submit</button>
-	</div>
-
-	<div id="boxMesIterativo">
-		<h2 id="mesIterativo"></h2>
-	</div>
-
-	<br>
-
-	<div id="addElement">
 		<div id="titleContainer">
 			<h2 id="titleTasks">ENTER YOUR TASKS HERE:</h2>
 		</div><br>
-
-		<div id="taskToInputContainer">
-			<label for="userSelected">User:</label><br>
-			<select name="userSelected" id="userSelected">
-			</select>
+        <form id="dateToInputContainer" action="{{url_for('addTask')}}" method="POST">
+			<label for="date">Date: YYYY-MM-DD</label><br>
+			<input type="text" id="date" name="date" value="" autocomplete="off" />
 			<br><br>
+		<form id="taskToInputContainer" action="{{url_for('addTask')}}" method="POST">
 			<label for="task">Task:</label><br>
 			<input type="text" id="task" name="task" value="" autocomplete="off" />
 			<br><br>
@@ -103,36 +79,15 @@
 				<option value="Media">Media</option>
 				<option value="Alta">Alta</option>
 			</select><br><br>
-			<button class="button" onclick="checkTaskAdmin()">Add Task</button>
-		</div>
+			<input type="hidden" value="" />
+			<input type="submit" value="Add Task" class="button" />
+		</form>
 	</div>
 	<br>
 	<!-- Aqui ira la lista todo con el w3includes -->
 	<div class="containerToDo">
 		<div style="display: none;" id="listToDo" name="w3includes" w3-include-html="/todolist"></div>
 
-	</div>
-
-	<div class="containerDash">
-		<div style="display: none;" id="listUsers" name="w3includes" w3-include-html="/dashboard1"></div>
-	</div>
-
-	<div id="opcionRemoverUsuarios" style="display: none;">
-		<button onclick='listUsersToDelete()'>REMOVE USER</button>
-	</div>
-
-	<div id="container-Input-Eliminar" style="display: none;">
-		<div id="titleContainerIE">
-			<h2 id="titleTasks3">USER TO REMOVE:</h2>
-		</div><br>
-
-		<div id="userToRemoveInput">
-			<label for="user">Pick the user you wish to remove:</label><br>
-			<select name="user" id="user">
-
-			</select><br><br>
-			<button onclick="deleteUserCliente()">Remove user</button>
-		</div>
 	</div>
 
 	<footer>
@@ -142,7 +97,6 @@
 	<script src="https://www.w3schools.com/lib/w3.js"></script>
 	<script type="text/javascript" src="/static/scriptCalendar_Template.js"></script>
 	<script src="/static/scriptCalendar.js"></script>
-	<script src="/static/scriptDashboard.js"></script>
 
 </body>
 

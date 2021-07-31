@@ -12,9 +12,11 @@
     <link rel="stylesheet" type="text/css" href="/static/styleCalendar.css" />
     <link rel="stylesheet" type="text/css" href="/static/styleCalendar_Template.css" />
     <link rel="shortcut icon" href="/static/images/calendarImageLogo.png" />
+
 </head>
 
 <body>
+
     <header>
         <div class="container">
             <nav>
@@ -65,35 +67,36 @@
 
     <div class="saludando">
         <h2 id="saludo">Hola, {{username}}.</h2>
-    </div><br>
-
+    </div>
+    <br>
 
     <div id="titleContainer">
-        <h4 id="titleTasks">Ingresa la fecha para ver tus tareas aquí:</h4>
+        <h2 id="titleTasks">Agrega tus tareas aquí:</h2>
     </div>
 
     <br>
 
-    <form class="inputDate" id="dateToInputContainer" action="{{url_for('peakTasksClient')}}" method="POST">
+    <form class="inputDate" id="dateToInputContainer" action="{{url_for('addtasktoBD')}}" method="POST">
         <label for="date">Date (YYYY-MM-DD):</label><br>
         <input type="text" id="date" name="date" value="" autocomplete="off" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
             required />
         <br><br>
 
-        <input type="submit" value="Submit" class="button" />
-    </form><br>
+        <label for="task">Task:</label><br>
+        <input type="text" id="task" name="task" value="" autocomplete="off" required />
+        <br><br>
 
-    <div id="listTitle">
-        <ul id="lista">
-            {% if tasks %}
-            {% for task in tasks %}
-                    {% set i = 1 %}
-                    <li>Task {{i}}: {{task}}</li>
-                    {%set i = i + 1%}
-            {% endfor %}
-            {% endif %}
-        </ul>
-    </div>
+        <label for="priority">Set priority:</label><br>
+        <select name="priority" id="priority">
+            <option value="Baja" selected>Baja</option>
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Agregar tarea" class="button" />
+    </form>
+    <br>
 
     <a href="{{url_for('calendar')}}" class="button">Regresar</a>
 
@@ -103,7 +106,6 @@
 
     <script type="text/javascript" src="/static/scriptCalendar_Template.js"></script>
     <script src="/static/scriptCalendar.js"></script>
-
 
 </body>
 
