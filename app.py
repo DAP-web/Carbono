@@ -52,7 +52,7 @@ def login():
                     print(userDict["admin"])
                     if userDict["admin"] == 0:
                         print("cliente -> calendar")
-                        return redirect("calendar")
+                        return redirect("todolist")
                     elif userDict["admin"] == 1:
                         print("admin -> dashboard")
                         return redirect("dashboard")
@@ -147,11 +147,23 @@ def addtasktoBD():
         return redirect('addtask')
     elif request.method == "POST":
         date = request.form["date"]
+        month = date[0:2]
+        day = date[3:5]
+        year = date[6:]
+        date = year + "-" + month + "-" + day
+        print(date)
+
         task = request.form["task"]
         priority = request.form["priority"]
 
         rows = logic.insertTask(userid, date, task, priority, 0)
-        print(f"Rows affected: {rows}","Task for", username, "added")
+        print(f"Rows affected: {rows}", "Task for", username, "added")
+        
+        if rows > 1:
+            session["addedTask"] = "Tu tarea se ha registrado con exito."
+        else:
+            session["addedTask"] = ""
+
         return redirect('addtask')
 
 @app.route("/todolist")
@@ -175,6 +187,10 @@ def peakTasksClient():
         dateTasks = []
 
         date = request.form["date"]
+        month = date[0:2]
+        day = date[3:5]
+        year = date[6:]
+        date = year + "-" + month + "-" + day
         print(date)
 
         for task in tasks:
