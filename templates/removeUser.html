@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar || ADMIN</title>
+
+    <!-- link calendar resources -->
+    <!-- <link rel="stylesheet" type="text/css" href="/static/styleGeneral.css" /> -->
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/static/styleCalendar.css" />
+    <link rel="shortcut icon" href="/static/images/calendarImageLogo.png" />
+    <link rel="stylesheet" href="/static/styleRemoveUser.css" />
+</head>
+
+<body>
+    <h1 id="saludo">Welcome {{username}}</h1>
+
+    <div class="row d-flex justify-content-center container">
+        <div class="col-md-8">
+            <div class="card-hover-shadow-2x mb-3 card">
+                <div class="card-header-tab card-header">
+                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                        <i class="fa fa-tasks"></i>&nbsp;{{username}} is ready to remove a user!
+                    </div>
+
+                </div>
+                <div class="scroll-area-sm">
+                    <perfect-scrollbar class="ps-show-limits">
+                        <div style="position: static;" class="ps ps--active-y">
+                            <div class="ps-content">
+                                <form class="removeUsersForm" action="{{url_for('removeUserBD')}}" method="POST">
+                                    <span class="color-picker"></span>
+
+                                    <br /><br />
+                                    <label for="userToRemove"
+                                        style="color: black;font-weight: bold;padding-left: 30%;">Elige el usaurio a
+                                        eliminar:</label><br>
+                                    <span class="custom-dropdown">
+                                        <select name="userToRemove" id="userToRemove">
+                                            {% if users %}
+                                            {% for user in users %}
+                                            <option value={{user.userid}}>{{user.username}}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </span>
+
+                                    <br />
+                                    <div class="REMbutton">
+                                        <input type="submit" value="Submit" class="btn btn-primary" />
+                                    </div>
+
+                                </form>
+                                <br><br>
+                                <p id="warning">ATENCION: Al remover al usuario tambien se eliminara toda su
+                                    informacion.</p>
+                                <ul class=" list-group list-group-flush">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </perfect-scrollbar>
+                </div>
+                <div class="d-block text-right card-footer">
+                    <a class="btn btn-primary" href="{{url_for('dashboardUsers')}}">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.1/prototype.js"></script>
+    <script src='/static/scriptRemoveUser.js'></script>
+</body>
+
+</html>
