@@ -75,6 +75,8 @@ def logout():
         session.pop("login_user_name")
         session.pop("login_user_CA")
         session.pop("loggedIn")
+        if session.get("date_tasksIDs"):
+            session.pop("date_tasksIDs")
         print("Session removed!")
         return redirect("login")
     else:
@@ -110,9 +112,40 @@ def registration():
             message = "Las contraseñas no coinciden. Verifique y vuelva a intentar."
             return redirect("registration", message = message)
 
-@app.route("/dashboard1")
-def dashboard1():
-    return render_template("dashboard1.html")
+@app.route("/dashboardUsers")
+def dashboardUsers():
+    logic = UserLogic()
+    userid = session.get("login_user_id")
+    username = session.get("login_user_name")
+
+    users = logic.getUsersClients()
+    
+    print("Redirecting", username, userid, "to users dashboard", sep = " ")
+    return render_template("dashboardUsers.html", userid=userid, username=username, users=users)
+    
+@app.route("/removeUser")
+def removeUser():
+    logic = UserLogic()
+    userid = session.get("login_user_id")
+    username = session.get("login_user_name")
+
+    users = logic.getUsersClients()
+    
+    print("Redirecting", username, userid, "to remove users", sep = " ")
+    return render_template("removeUser.html", userid=userid, username=username, users=users)
+
+@app.route("/removeUserBD", methods=["GET", "POST"])
+def removeUserBD():
+    if request.method == "GET":
+        return render_template("removeUser.html")
+    elif request.method == "POST":
+        logic = UserLogic()
+
+        deleteUserID = request.form["userToRemove"]
+        rows = logic.deleteUserClient(deleteUserID)
+
+        print("Rows affected:", rows, sep = " ")
+        return redirect('removeUser')
 
 @app.route("/dashboard")
 def dashboard():
@@ -223,6 +256,7 @@ def peakTasks():
             tasksA = logic.getAllTasksByUser(userid)
             dateTasksC = []
             dateTasksA = []
+            tasksIDs = []
 
             date = request.form["date"]
             month = date[0:2]
@@ -234,14 +268,22 @@ def peakTasks():
             for task in tasksC:
                 if date == str(task["date"]):
                     dateTasksC.append(task)
+                    tasksIDs.append(task["taskid"])
                 else:
                     continue
 
             for task in tasksA:
                 if date == str(task["date"]):
                     dateTasksA.append(task)
+                    tasksIDs.append(task["taskid"])
                 else:
                     continue
+
+            if session.get("date_tasksIDs"):
+                session.pop("date_tasksIDs")
+                print("Found a previos list and removed it!")
+
+            session["date_tasksIDs"] = tasksIDs
 
             print(dateTasksC, dateTasksA)
             return render_template("dashboardToDo.html", userid=userid, username=username, tasksC=dateTasksC, tasksA = dateTasksA, date = date)
@@ -260,6 +302,23 @@ def acerca():
 @app.route("/contactanos")
 def contactanos():
     return render_template("contactanos.html")
+
+@app.route("/prueba", methods = ["GET", "POST"])
+def checkTask():
+    if request.method == "GET":
+        pass
+    elif request.method == "POST":
+        tasksIDs = session.get("date_tasksIDs")
+        selectedIDs = []
+        for currentID in tasksIDs:
+            name = "tarea" + str(currentID)
+            id = request.form.get(name, False)
+            print(id)  
+            if id:
+                selectedIDs.append(int(id))
+
+        print(selectedIDs)
+        return redirect("peakTasks")
 
 if __name__ == "__main__":
     app.run(debug=True)
