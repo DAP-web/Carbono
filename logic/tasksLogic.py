@@ -48,11 +48,11 @@ class TaskLogic(PybaLogic):
         rows = database.executeNonQueryRows(sql)
         return rows
 
-    def updateTask(self, taskid, nuevoEstado):
+    def updateTask(self, taskid):
         database = self.createDatabaseObj()
         sql = (
             f"""
-            UPDATE `carbonodb`.`tasks` SET `estado` = '{nuevoEstado}' WHERE `taskid` = '{taskid}';
+            UPDATE `carbonodb`.`tasks` SET `estado` = 1 WHERE `taskid` = '{taskid}';
             """
         )
         rows = database.executeNonQueryRows(sql)
