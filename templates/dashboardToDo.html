@@ -39,7 +39,13 @@
                             <i class="fa fa-tasks"></i>&nbsp;{{username}}'s Task Lists
                             {% if date %}from {{date}}{% endif %}
                         </div>
-                        <input type="submit" value="Marcar tareas como hechas" class="btn btn-primary" />
+                        <div class="updateBTN">
+                            <input type="submit" name="update" value="Marcar tareas como hechas"
+                                class="btn btn-primary" />
+                        </div>
+                        <div class="updateBTN">
+                            <input type="submit" name="delete" value="Eliminar tareas" class="btn btn-primary" />
+                        </div>
                     </div>
                     <div class="scroll-area-sm">
                         <perfect-scrollbar class="ps-show-limits">
@@ -68,21 +74,24 @@
                                                     <div class="widget-content-left">
                                                         <div class="widget-heading">{{task.task}}
                                                             <div class="badge badge-danger ml-2">
-                                                                {% if task.estado == 0 %}En proceso{% endif %}
-                                                                {% if task.estado == 1 %}Hecho{% endif %}
+                                                                Prioridad: {{task.priority}}
                                                             </div>
                                                         </div>
-                                                        <div class="widget-subheading"><i>Prioridad:
-                                                                {{task.priority}}</i>
+                                                        <div class="widget-subheading">
+                                                            <i>Categoria: {{task.categoria}}</i>
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-right">
-                                                        <button class="border-0 btn-transition btn btn-outline-success">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
                                                             <i class="fa fa-check"></i>
-                                                        </button>
-                                                        <button class="border-0 btn-transition btn btn-outline-danger">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+                                                        </span>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,19 +111,28 @@
                                                                 for="tarea{{task.taskid}}">&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="widget-content-left flex2">
-                                                        <div class="widget-heading">{{task.task}}</div>
-                                                        <div class="widget-subheading">Prioridad: {{task.priority}}
+                                                    <div class="widget-content-left">
+                                                        <div class="widget-heading">{{task.task}}
+                                                            <div class="badge badge-pill badge-info ml-2">
+                                                                Prioridad: {{task.priority}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-subheading">
+                                                            <i>Categoria: {{task.categoria}}</i>
                                                         </div>
                                                     </div>
 
                                                     <div class="widget-content-right">
-                                                        <button class="border-0 btn-transition btn btn-outline-success">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
                                                             <i class="fa fa-check"></i>
-                                                        </button>
-                                                        <button class="border-0 btn-transition btn btn-outline-danger">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+                                                        </span>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,17 +153,27 @@
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-left flex2">
-                                                        <div class="widget-heading">{{task.task}}</div>
-                                                        <div class="widget-subheading">Prioridad: {{task.priority}}
+                                                        <div class="widget-heading">{{task.task}}
+                                                            <div class="badge badge-pill ml-2"
+                                                                style="background-color: #F9E79F;">
+                                                                Prioridad: {{task.priority}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-subheading">
+                                                            <i>Categoria: {{task.categoria}}</i>
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-right">
-                                                        <button class="border-0 btn-transition btn btn-outline-success">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
                                                             <i class="fa fa-check"></i>
-                                                        </button>
-                                                        <button class="border-0 btn-transition btn btn-outline-danger">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+                                                        </span>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,21 +202,24 @@
                                                     <div class="widget-content-left">
                                                         <div class="widget-heading">{{task.username}}: {{task.task}}
                                                             <div class="badge badge-danger ml-2">
-                                                                {% if task.estado == 0 %}En proceso{% endif %}
-                                                                {% if task.estado == 1 %}Hecho{% endif %}
+                                                                Prioridad: {{task.priority}}
                                                             </div>
                                                         </div>
-                                                        <div class="widget-subheading"><i>Prioridad:
-                                                                {{task.priority}}</i>
+                                                        <div class="widget-subheading"><i>Categoria:
+                                                                {{task.categoria}}</i>
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-right">
-                                                        <button class="border-0 btn-transition btn btn-outline-success">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
                                                             <i class="fa fa-check"></i>
-                                                        </button>
-                                                        <button class="border-0 btn-transition btn btn-outline-danger">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+                                                        </span>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,18 +241,26 @@
                                                     </div>
                                                     <div class="widget-content-left flex2">
                                                         <div class="widget-heading">{{task.username}}: {{task.task}}
+                                                            <div class="badge badge-pill badge-info ml-2">
+                                                                Prioridad: {{task.priority}}
+                                                            </div>
                                                         </div>
-                                                        <div class="widget-subheading">Prioridad: {{task.priority}}
+                                                        <div class="widget-subheading">
+                                                            <i>Categoria: {{task.categoria}}</i>
                                                         </div>
                                                     </div>
 
                                                     <div class="widget-content-right">
-                                                        <button class="border-0 btn-transition btn btn-outline-success">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
                                                             <i class="fa fa-check"></i>
-                                                        </button>
-                                                        <button class="border-0 btn-transition btn btn-outline-danger">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+                                                        </span>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -243,17 +282,26 @@
                                                     </div>
                                                     <div class="widget-content-left flex2">
                                                         <div class="widget-heading">{{task.username}}: {{task.task}}
+                                                            <div class="badge badge-pill ml-2"
+                                                                style="background-color: #F9E79F;">
+                                                                Prioridad: {{task.priority}}
+                                                            </div>
                                                         </div>
-                                                        <div class="widget-subheading">Prioridad: {{task.priority}}
+                                                        <div class="widget-subheading">
+                                                            <i>Categoria: {{task.categoria}}</i>
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-right">
-                                                        <button class="border-0 btn-transition btn btn-outline-success">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
                                                             <i class="fa fa-check"></i>
-                                                        </button>
-                                                        <button class="border-0 btn-transition btn btn-outline-danger">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+                                                        </span>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,6 +332,7 @@
 
     <script src='/static/scriptCalendar_Template.js'></script>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="/static/scriptToDo.js"></script>
 </body>
 
 </html>

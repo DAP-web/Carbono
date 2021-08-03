@@ -6,7 +6,7 @@ class TaskLogic(PybaLogic):
 
     def getAllTasksClients(self):
         database = self.createDatabaseObj()
-        sql = f"""SELECT tasks.taskid, tasks.userid, user.username, user.admin, tasks.date, tasks.priority, tasks.task, tasks.estado
+        sql = f"""SELECT tasks.taskid, tasks.userid, user.username, user.admin, tasks.date, tasks.priority, tasks.task, tasks.estado, tasks.categoria
                     FROM tasks inner join user on tasks.userid = user.userid
                     WHERE user.admin <> 1;
                 """
@@ -25,24 +25,26 @@ class TaskLogic(PybaLogic):
         result = database.executeQuery(sql)
         return result
 
-    def insertTask(self, userid, date, task, priority, estado):
+    def insertTask(self, userid, date, task, priority, estado, categoria):
         database = self.databaseObj
         tasks = {
             "userid": userid,
             "date": date,
             "task": task,
             "priority": priority,
-            "estado": estado
+            "estado": estado,
+            "categoria":categoria
         }
         sql = (
             f"""
-                INSERT INTO `carbonodb`.`tasks` (`userid`, `date`, `task`, `priority`, `estado`)
+                INSERT INTO `carbonodb`.`tasks` (`userid`, `date`, `task`, `priority`, `estado`, `categoria`)
                 VALUES
                 ('{tasks["userid"]}', 
                 '{tasks["date"]}', 
                 '{tasks["task"]}', 
                 '{tasks["priority"]}', 
-                '{tasks["estado"]}');
+                '{tasks["estado"]}',
+                '{tasks["categoria"]}');
             """
         )
         rows = database.executeNonQueryRows(sql)
@@ -57,6 +59,12 @@ class TaskLogic(PybaLogic):
         )
         rows = database.executeNonQueryRows(sql)
         return rows
+    
+    def traerCategorias(self):
+        database = self.createDatabaseObj()
+        sql = f"SELECT DISTINCT categoria FROM tasks;"
+        result = database.executeQuery(sql)
+        return result
 
     # def deleteTask(self, taskid):
     #     database = self.createDatabaseObj()

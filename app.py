@@ -176,11 +176,13 @@ def calendar():
 
 @app.route("/addtask")
 def addtask():
+    logic = TaskLogic()
     userid = session.get("login_user_id")
     username = session.get("login_user_name")
+    categorias = logic.traerCategorias()
 
     print("Redirected", username, "to add a task.", sep=" ")
-    return render_template("addtask.html", userid=userid, username=username)
+    return render_template("addtask.html", userid=userid, username=username, categorias = categorias)
 
 @app.route("/addtaskbd", methods=["GET", "POST"])
 def addtasktoBD():
@@ -200,8 +202,14 @@ def addtasktoBD():
 
         task = request.form["task"]
         priority = request.form["priority"]
+        if request.form.get("categoria", False):
+            categoria = request.form.get("categoria", False)
+            categoria.capitalize()
+        else:
+            categoria = request.form.get("nuevaCategoria", False)
+            categoria = categoria.capitalize()
 
-        rows = logic.insertTask(userid, date, task, priority, 0)
+        rows = logic.insertTask(userid, date, task, priority, 0, categoria)
         print(f"Rows affected: {rows}", "Task for", username, "added")
         
         if rows > 1:
@@ -213,8 +221,12 @@ def addtasktoBD():
 
 @app.route("/todolist")
 def todolist():
+    if int(session.get("login_user_CA")) == 1:
+        return redirect("dashboard")
+        
     userid = session.get("login_user_id")
     username = session.get("login_user_name")
+  
     dateTasks = []
 
     print("Redirected", username, "to peak tasks.", sep=" ")
@@ -223,7 +235,10 @@ def todolist():
 @app.route("/peakTasks", methods=["GET", "POST"])
 def peakTasks():
     if request.method == "GET":
-        return redirect("todolist")
+        if int(session.get("login_user_CA")) == 0:
+            return redirect("todolist")
+        elif int(session.get("login_user_CA")) == 1:
+            return redirect("dashboard")
     elif request.method == "POST":
         if int(session.get("login_user_CA")) == 0:
             logic = TaskLogic()
@@ -303,12 +318,13 @@ def acerca():
 def contactanos():
     return render_template("contactanos.html")
 
-@app.route("/prueba", methods = ["GET", "POST"])
+@app.route("/checkTask", methods = ["GET", "POST"])
 def checkTask():
     if request.method == "GET":
         pass
     elif request.method == "POST":
         tasksIDs = session.get("date_tasksIDs")
+        
         selectedIDs = []
         for currentID in tasksIDs:
             name = "tarea" + str(currentID)
@@ -316,6 +332,11 @@ def checkTask():
             print(id)  
             if id:
                 selectedIDs.append(int(id))
+
+        if request.form.get("update", False):
+            print("Aquí se irán a actualizar los estados a la BD")
+        elif request.form.get("delete", False):
+            print("Aquí se irán a eliminar las tareas a la BD")
 
         print(selectedIDs)
         return redirect("peakTasks")

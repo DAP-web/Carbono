@@ -15,9 +15,9 @@ class UserLogic(PybaLogic):
         }
         sql = (
             f"""
-            INSERT INTO `carbonodb`.`user` (`username`, `email`, `password`,`salt`, `admin`) 
+            INSERT INTO `carbonodb`.`user` (`username`, `email`, `password`,`salt`, `admin`, `creation`) 
             VALUES ('{user["username"]}', '{user["useremail"]}', '{user["password"]}', '{user["salt"]}',
-            '{user["admin"]}');
+            '{user["admin"]}', current_date());
             """
         )
         rows = database.executeNonQueryRows(sql)

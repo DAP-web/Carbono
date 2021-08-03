@@ -51,7 +51,29 @@
                                         <option value="Alta">Alta</option>
                                     </select><br><br>
 
+                                    <label for="categoria" class="labelsIN">Selecciona una categoria:</label><br>
+                                    <select name="categoria" id="categoria">
+                                        {% if categorias %}
+                                        {% for categoria in categorias %}
+                                        <option value="{{categoria.categoria}}">{{categoria.categoria}}</option>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </select><br><br>
+
+                                    <button type="button" class="btn btn-primary" id="agCat"
+                                        onclick="agregarCategoria()">
+                                        <strong>¡Click para agregar categoria!</strong>
+                                    </button>
+                                    <br><br>
+
+                                    <label for="nuevaCategoria" class="labelsIN">Ingresa la categoria nueva:</label><br>
+                                    <input type="text" id="nuevaCategoria" name="nuevaCategoria" value=""
+                                        autocomplete="off" disabled />
+                                    <br><br>
+
                                     <input type="submit" class="btn btn-primary" value="Submit" class="button" />
+
+
                                 </form>
                                 <ul class=" list-group list-group-flush">
 
@@ -75,6 +97,7 @@
 
     <script src='/static/scriptCalendar_Template.js'></script>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="/static/scriptAddTask.js"></script>
 </body>
 
 </html>
