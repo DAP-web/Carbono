@@ -46,7 +46,7 @@ class UserLogic(PybaLogic):
 
     def deleteUserClient(self, id):
         database = self.databaseObj
-        sql = (f"""DELETE FROM `carbonodb`.`user` WHERE userid={id};""")
+        sql = (f"DELETE FROM `carbonodb`.`user` WHERE userid={id};")
         rows = database.executeNonQueryRows(sql)
         return rows
 

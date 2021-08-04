@@ -37,44 +37,48 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% if users %}
-                                    {% for user in users %}
-                                    <tr>
-                                        <td>
-                                            <img src="https://bootdey.com/img/Content/user_1.jpg" alt="">
-                                            <a href="#" class="user-link">{{user.username}}</a>
-                                            <span class="user-subhead">Member</span>
-                                        </td>
-                                        <td>2013/08/12</td>
-                                        <td class="text-center">
-                                            <span class="label label-default">{{user.userid}}</span>
-                                        </td>
-                                        <td>
-                                            <a href="#">{{user.email}}</a>
-                                        </td>
-                                        <td style="width: 20%;">
-                                            <a href="#" class="table-link text-warning">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="#" class="table-link text-info">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="{{url_for('removeUser')}}" class="table-link danger">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                    {% endif %}
+                                    <form action="{{url_for('removeUserBD')}}" method="POST">
+                                        {% if users %}
+                                        {% for user in users %}
+                                        <tr>
+                                            <td>
+                                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="">
+                                                <a href="#" class="user-link">{{user.username}}</a>
+                                                <span class="user-subhead">Member</span>
+                                            </td>
+                                            <td>{{user.creation}}</td>
+                                            <td class="text-center">
+                                                <span class="label label-default">{{user.userid}}</span>
+                                            </td>
+                                            <td>
+                                                <a href="#">{{user.email}}</a>
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <a href="#" class="table-link text-warning">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                                <a href="#" class="table-link text-info">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                                <input type="submit" name="user{{user.userid}}"
+                                                    class="table-link danger fa-stack fa fa-square fa-trash-o fa-inverse"
+                                                    value="🗑" style="background-color: red;">
+                                                <!-- <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span> -->
+                                                </input>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </form>
                                     <!-- <tr>
                                         <td>
                                             <img src="https://bootdey.com/img/Content/user_3.jpg" alt="">
