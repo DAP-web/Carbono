@@ -66,8 +66,8 @@ class TaskLogic(PybaLogic):
         result = database.executeQuery(sql)
         return result
 
-    # def deleteTask(self, taskid):
-    #     database = self.createDatabaseObj()
-    #     sql = f"delete from tasks where taskid={taskid};"
-    #     rows = database.executeNonQueryRows(sql)
-    #     return rows
+    def deleteTask(self, taskid):
+        database = self.createDatabaseObj()
+        sql = f"DELETE FROM `carbonodb`.`tasks` WHERE `taskid` = '{taskid}';"
+        rows = database.executeNonQueryRows(sql)
+        return rows

@@ -38,7 +38,13 @@
                         <i class="fa fa-tasks"></i>&nbsp;{{username}}'s Task Lists
                         {% if date %}from {{date}}{% endif %}
                     </div>
-
+                    <div class="updateBTN">
+                         <input type="submit" name="update" value="Marcar tareas como hechas"
+                                class="btn btn-primary" />
+                    </div>
+                    <div class="updateBTN">
+                            <input type="submit" name="delete" value="Eliminar tareas" class="btn btn-primary" />
+                    </div>
                 </div>
                 <div class="scroll-area-sm">
                     <perfect-scrollbar class="ps-show-limits">
@@ -46,104 +52,132 @@
                             <div class="ps-content">
                                 <ul class=" list-group list-group-flush">
                                     {% if tasks %}
-                                    {% for task in tasks %}
-                                    {% if task.priority == "Alta" %}
-                                    <li class="list-group-item">
-                                        <div class="todo-indicator bg-warning">
-                                        </div>
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-2">
-                                                    <div class="custom-checkbox custom-control">
-                                                        <input class="custom-control-input" id="exampleCustomCheckbox12"
-                                                            type="checkbox">
-                                                        <label class="custom-control-label"
-                                                            for="exampleCustomCheckbox12">&nbsp;</label>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content-left">
-                                                    <div class="widget-heading">{{task.task}}
-                                                        <div class="badge badge-danger ml-2">
-                                                            {% if task.estado == 0 %}En proceso{% endif %}
-                                                            {% if task.estado == 1 %}Hecho{% endif %}
+                                        {% for task in tasks %}
+                                        {% if task.priority == "Alta" %}
+                                        <li class="list-group-item">
+                                            <div class="todo-indicator bg-warning">
+                                            </div>
+                                            <div class="widget-content p-0">
+                                                <div class="widget-content-wrapper">
+                                                    <div class="widget-content-left mr-2">
+                                                        <div class="custom-checkbox custom-control">
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}">
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="widget-subheading"><i>Prioridad: {{task.priority}}</i>
+                                                    <div class="widget-content-left">
+                                                        <div class="widget-heading">{{task.task}}
+                                                            <div class="badge badge-danger ml-2">
+                                                                Prioridad: {{task.priority}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-subheading">
+                                                            <i>Categoria: {{task.categoria}}</i>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="widget-content-right">
-                                                    <button class="border-0 btn-transition btn btn-outline-success">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                    <button class="border-0 btn-transition btn btn-outline-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
+                                                    <div class="widget-content-right">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
+                                                            <i class="fa fa-check"></i>
+                                                        </span>
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    {% endif %}
-                                    {% if task.priority == "Media" %}
-                                    <li class="list-group-item">
-                                        <div class="todo-indicator bg-success"></div>
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-2">
-                                                    <div class="custom-checkbox custom-control">
-                                                        <input class="custom-control-input" id="exampleCustomCheckbox10"
-                                                            type="checkbox">
-                                                        <label class="custom-control-label"
-                                                            for="exampleCustomCheckbox10">&nbsp;</label>
+                                        </li>
+                                        {% endif %}
+                                        {% if task.priority == "Media" %}
+                                        <li class="list-group-item">
+                                            <div class="todo-indicator bg-success"></div>
+                                            <div class="widget-content p-0">
+                                                <div class="widget-content-wrapper">
+                                                    <div class="widget-content-left mr-2">
+                                                        <div class="custom-checkbox custom-control">
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}">
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="widget-content-left flex2">
-                                                    <div class="widget-heading">{{task.task}}</div>
-                                                    <div class="widget-subheading">Prioridad: {{task.priority}}</div>
-                                                </div>
+                                                    <div class="widget-content-left">
+                                                        <div class="widget-heading">{{task.task}}
+                                                            <div class="badge badge-pill badge-info ml-2">
+                                                                Prioridad: {{task.priority}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-subheading">
+                                                            <i>Categoria: {{task.categoria}}</i>
+                                                        </div>
+                                                    </div>
 
-                                                <div class="widget-content-right">
-                                                    <button class="border-0 btn-transition btn btn-outline-success">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                    <button class="border-0 btn-transition btn btn-outline-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    {% endif %}
-                                    {% if task.priority == "Baja" %}
-                                    <li class="list-group-item">
-                                        <div class="todo-indicator bg-primary"></div>
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-2">
-                                                    <div class="custom-checkbox custom-control">
-                                                        <input class="custom-control-input" id="exampleCustomCheckbox4"
-                                                            type="checkbox">
-                                                        <label class="custom-control-label"
-                                                            for="exampleCustomCheckbox4">&nbsp;</label>
+                                                    <div class="widget-content-right">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
+                                                            <i class="fa fa-check"></i>
+                                                        </span>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
-                                                <div class="widget-content-left flex2">
-                                                    <div class="widget-heading">{{task.task}}</div>
-                                                    <div class="widget-subheading">Prioridad: {{task.priority}}</div>
-                                                </div>
-                                                <div class="widget-content-right">
-                                                    <button class="border-0 btn-transition btn btn-outline-success">
-                                                        <i class="fa fa-check"></i>
-                                                    </button>
-                                                    <button class="border-0 btn-transition btn btn-outline-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
+                                            </div>
+                                        </li>
+                                        {% endif %}
+                                        {% if task.priority == "Baja" %}
+                                        <li class="list-group-item">
+                                            <div class="todo-indicator bg-primary"></div>
+                                            <div class="widget-content p-0">
+                                                <div class="widget-content-wrapper">
+                                                    <div class="widget-content-left mr-2">
+                                                        <div class="custom-checkbox custom-control">
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}">
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="widget-content-left flex2">
+                                                        <div class="widget-heading">{{task.task}}
+                                                            <div class="badge badge-pill ml-2"
+                                                                style="background-color: #F9E79F;">
+                                                                Prioridad: {{task.priority}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-subheading">
+                                                            <i>Categoria: {{task.categoria}}</i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="widget-content-right">
+                                                        {% if task.estado == 0 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-danger">
+                                                            <i class="fa">❌</i>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if task.estado == 1 %}
+                                                        <span class="border-0 btn-transition btn btn-outline-success">
+                                                            <i class="fa fa-check"></i>
+                                                        </span>
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    {% endif %}
-                                    {% endfor %}
-                                    {% endif %}
+                                        </li>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endif %}
                                 </ul>
                             </div>
                         </div>

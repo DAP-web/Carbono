@@ -360,5 +360,40 @@ def checkTask():
         print(selectedIDs)
         return redirect("peakTasks")
 
+""" @app.route("/removeTask")
+def removeTask():
+    logic = UserLogic()
+    userid = session.get("login_user_id")
+    username = session.get("login_user_name")
+
+    users = logic.getAllTasksByUser()
+    
+    print("Redirecting", username, userid, "to remove task", sep = " ")
+    return render_template("todolist.html", userid=userid, username=username, users=users)
+
+@app.route("/removeTaskBD", methods=["GET", "POST"])
+def removeUserBD():
+    if request.method == "GET":
+        return render_template("todolist.html")
+    elif request.method == "POST":
+        logic = TaskLogic()
+
+        tasks = session.get("usersDash")
+        idtask = 0
+
+        for task in tasks:
+            name = "user" + str(task)
+            print(name)
+            deleteTaskID = request.form.get(name, False)
+            print(deleteTaskID)
+            if deleteTaskID:
+                idtask = tasks
+
+        print(idtask)
+        rows = logic.deleteUserClient(idtask)
+
+        print("Rows affected:", rows, sep = " ")
+        return redirect('dashboardUsers') """
+
 if __name__ == "__main__":
     app.run(debug=True)
