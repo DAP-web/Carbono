@@ -71,3 +71,4 @@ class TaskLogic(PybaLogic):
         sql = f"DELETE FROM `carbonodb`.`tasks` WHERE `taskid` = '{taskid}';"
         rows = database.executeNonQueryRows(sql)
         return rows
+
