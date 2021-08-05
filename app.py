@@ -390,10 +390,10 @@ def removeUserBD():
                 idtask = tasks
 
         print(idtask)
-        rows = logic.deleteUserClient(idtask)
+        rows = logic.deleteTask(idtask)
 
         print("Rows affected:", rows, sep = " ")
-        return redirect('dashboardUsers') """
-
+        return redirect('dashboardUsers')
+ """
 if __name__ == "__main__":
     app.run(debug=True)
