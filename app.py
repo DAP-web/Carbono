@@ -11,9 +11,11 @@ cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 app.secret_key = "B4DB7NN7B4B7"
 
+
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -28,7 +30,7 @@ def login():
 
         response = requests.post(
             "https://www.google.com/recaptcha/api/siteverify",
-            params = data
+            params=data
         )
 
         if response.status_code == 200:
@@ -68,6 +70,7 @@ def login():
         else:
             return redirect("login")
 
+
 @app.route("/logout")
 def logout():
     if session.get("loggedIn"):
@@ -83,6 +86,7 @@ def logout():
     else:
         return redirect("login")
 
+
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
     if request.method == "GET":
@@ -97,21 +101,22 @@ def registration():
         admin = request.form["adminORClient"]
 
         if password == cPassword:
-            salt = bcrypt.gensalt(rounds = 14)
+            salt = bcrypt.gensalt(rounds=14)
             epswd = password.encode("utf-8")
 
             hashpswd = bcrypt.hashpw(epswd, salt)
 
             strSalt = salt.decode("utf-8")
-            strPswd = hashpswd.decode("utf-8")            
+            strPswd = hashpswd.decode("utf-8")
 
             rows = logic.insertUser(username, email, strPswd, strSalt, admin)
-            print("Rows affected:", rows, sep = " ")
+            print("Rows affected:", rows, sep=" ")
 
             return redirect("login")
         else:
             message = "Las contraseñas no coinciden. Verifique y vuelva a intentar."
-            return redirect("registration", message = message)
+            return redirect("registration", message=message)
+
 
 @app.route("/dashboardUsers")
 def dashboardUsers():
@@ -128,10 +133,11 @@ def dashboardUsers():
         usersids.append(user["userid"])
 
     session["usersDash"] = usersids
-    
-    print("Redirecting", username, userid, "to users dashboard", sep = " ")
+
+    print("Redirecting", username, userid, "to users dashboard", sep=" ")
     return render_template("dashboardUsers.html", userid=userid, username=username, users=users)
-    
+
+
 @app.route("/removeUser")
 def removeUser():
     logic = UserLogic()
@@ -139,9 +145,10 @@ def removeUser():
     username = session.get("login_user_name")
 
     users = logic.getUsersClients()
-    
-    print("Redirecting", username, userid, "to remove users", sep = " ")
+
+    print("Redirecting", username, userid, "to remove users", sep=" ")
     return render_template("removeUser.html", userid=userid, username=username, users=users)
+
 
 @app.route("/removeUserBD", methods=["GET", "POST"])
 def removeUserBD():
@@ -160,12 +167,14 @@ def removeUserBD():
             print(deleteUserID)
             if deleteUserID:
                 iduser = user
+                break
 
         print(iduser)
         rows = logic.deleteUserClient(iduser)
 
-        print("Rows affected:", rows, sep = " ")
+        print("Rows affected:", rows, sep=" ")
         return redirect('dashboardUsers')
+
 
 @app.route("/dashboard")
 def dashboard():
@@ -174,12 +183,13 @@ def dashboard():
         print("Found a session!")
         userid = session.get("login_user_id")
         username = session.get("login_user_name")
-        print("Redirecting", username, userid, "to ToDoList", sep = " ")
-        
+        print("Redirecting", username, userid, "to ToDoList", sep=" ")
+
         return render_template("dashboardToDo.html", userid=userid, username=username)
     else:
         print("Didn't find a session. Redirecting to Login!")
         return redirect("login")
+
 
 @app.route("/calendar")
 def calendar():
@@ -188,11 +198,12 @@ def calendar():
         print("Found a session!")
         userid = session.get("login_user_id")
         username = session.get("login_user_name")
-        
+
         return render_template("calendar.html", userid=userid, username=username)
     else:
         print("Didn't find a session. Redirecting to Login!")
         return redirect("login")
+
 
 @app.route("/addtask")
 def addtask():
@@ -202,14 +213,15 @@ def addtask():
     categorias = logic.traerCategorias()
 
     print("Redirected", username, "to add a task.", sep=" ")
-    return render_template("addtask.html", userid=userid, username=username, categorias = categorias)
+    return render_template("addtask.html", userid=userid, username=username, categorias=categorias)
+
 
 @app.route("/addtaskbd", methods=["GET", "POST"])
 def addtasktoBD():
     logic = TaskLogic()
     userid = session.get("login_user_id")
     username = session.get("login_user_name")
-    
+
     if request.method == "GET":
         return redirect('addtask')
     elif request.method == "POST":
@@ -224,14 +236,14 @@ def addtasktoBD():
         priority = request.form["priority"]
         if request.form.get("categoria", False):
             categoria = request.form.get("categoria", False)
-            categoria.capitalize()
+            categoria = categoria.capitalize()
         else:
             categoria = request.form.get("nuevaCategoria", False)
             categoria = categoria.capitalize()
 
         rows = logic.insertTask(userid, date, task, priority, 0, categoria)
         print(f"Rows affected: {rows}", "Task for", username, "added")
-        
+
         if rows > 1:
             session["addedTask"] = "Tu tarea se ha registrado con exito."
         else:
@@ -239,18 +251,20 @@ def addtasktoBD():
 
         return redirect('addtask')
 
+
 @app.route("/todolist")
 def todolist():
     if int(session.get("login_user_CA")) == 1:
         return redirect("dashboard")
-        
+
     userid = session.get("login_user_id")
     username = session.get("login_user_name")
-  
+
     dateTasks = []
 
     print("Redirected", username, "to peak tasks.", sep=" ")
-    return render_template("todolist.html", userid=userid, username=username, tasks = dateTasks)
+    return render_template("todolist.html", userid=userid, username=username, tasks=dateTasks)
+
 
 @app.route("/peakTasks", methods=["GET", "POST"])
 def peakTasks():
@@ -275,6 +289,12 @@ def peakTasks():
             date = year + "-" + month + "-" + day
             print(date)
 
+            if session.get("current_date"):
+                session.pop("current_date")
+                print("Found a previos date and removed it!")
+
+            session["current_date"] = date
+
             for task in tasks:
                 if date == str(task["date"]):
                     dateTasks.append(task)
@@ -288,14 +308,15 @@ def peakTasks():
 
             session["date_tasksIDs"] = tasksIDs
 
+            categorias = logic.traerCategorias()
+
             print(dateTasks)
-            return render_template("todolist.html", userid=userid, username=username, tasks=dateTasks, date = date)
+            return render_template("todolist.html", userid=userid, username=username, tasks=dateTasks, date=date, categorias=categorias)
         elif int(session.get("login_user_CA")) == 1:
             logic = TaskLogic()
 
             userid = session.get("login_user_id")
             username = session.get("login_user_name")
-            ca = session.get("login_user_CA")
             tasksC = logic.getAllTasksClients()
             tasksA = logic.getAllTasksByUser(userid)
             dateTasksC = []
@@ -308,6 +329,12 @@ def peakTasks():
             year = date[6:]
             date = year + "-" + month + "-" + day
             print(date)
+
+            if session.get("current_date"):
+                session.pop("current_date")
+                print("Found a previos date and removed it!")
+
+            session["current_date"] = date
 
             for task in tasksC:
                 if date == str(task["date"]):
@@ -329,8 +356,10 @@ def peakTasks():
 
             session["date_tasksIDs"] = tasksIDs
 
+            categorias = logic.traerCategorias()
+
             print(dateTasksC, dateTasksA)
-            return render_template("dashboardToDo.html", userid=userid, username=username, tasksC=dateTasksC, tasksA = dateTasksA, date = date)
+            return render_template("dashboardToDo.html", userid=userid, username=username, tasksC=dateTasksC, tasksA=dateTasksA, date=date, categorias=categorias)
         # else:
         #     return redirect('todolist')
 
@@ -339,26 +368,29 @@ def peakTasks():
 def beneficios():
     return render_template("beneficios.html")
 
+
 @app.route("/acerca")
 def acerca():
     return render_template("acerca.html")
+
 
 @app.route("/contactanos")
 def contactanos():
     return render_template("contactanos.html")
 
-@app.route("/checkTask", methods = ["GET", "POST"])
+
+@app.route("/checkTask", methods=["GET", "POST"])
 def checkTask():
     if request.method == "GET":
-        pass
+        return redirect("todolist")
     elif request.method == "POST":
         tasksIDs = session.get("date_tasksIDs")
-        
+
         selectedIDs = []
         for currentID in tasksIDs:
             name = "tarea" + str(currentID)
             id = request.form.get(name, False)
-            print(id)  
+            print(id)
             if id:
                 selectedIDs.append(int(id))
 
@@ -369,7 +401,7 @@ def checkTask():
                 rows = logic.updateTask(task)
                 rowsTotal += rows
             print(rowsTotal)
-            print("Rows affected:", rowsTotal, sep = " ")
+            print("Rows affected:", rowsTotal, sep=" ")
 
             return redirect("todolist")
         elif request.form.get("delete", False):
@@ -380,11 +412,166 @@ def checkTask():
                 rowsTotal += rows
             print(rowsTotal)
 
-            print("Rows affected:", rowsTotal, sep = " ")
+            print("Rows affected:", rowsTotal, sep=" ")
             return redirect("todolist")
 
         print(selectedIDs)
         return redirect("peakTasks")
+
+
+@app.route("/filterTasks", methods=["GET", "POST"])
+def filterTasks():
+    print("Llega aqui")
+    if request.method == "GET":
+        print("Se mete a Get")
+        return redirect("todolist")
+    elif request.method == "POST":
+        print("se mete a POST")
+        logic = TaskLogic()
+
+        # Recuperando informacion sobre el usuario
+        userid = session.get("login_user_id")
+        username = session.get("login_user_name")
+
+        # Pidiendo la fecha a aplicar los filtros
+        date = session.get("current_date")
+
+        # Construyendo listas con opciones de filtros
+        prioridades = ["Alta", "Media", "Baja"]
+
+        categorias = logic.traerCategorias()
+        listaCat = []
+        for categoria in categorias:
+            listaCat.append(categoria["categoria"])
+
+        estados = [0, 1]
+
+        # Recuperando Informacion del form
+        sol_prioridad = request.form["filtroPrioridad"]
+        sol_categoria = request.form["filtroCategoria"]
+        sol_estado = request.form["filtroEstado"]
+
+        print(type(sol_prioridad), type(
+            sol_categoria), type(sol_estado))
+
+        if int(session.get("login_user_CA")) == 0:
+            tasks = logic.getAllTasksByUser(userid)
+
+        elif int(session.get("login_user_CA")) == 1:
+            tasksCAll = logic.getAllTasksClients()
+            tasksAAll = logic.getAllTasksByUser(userid)
+            tasksC = []
+            tasksA = []
+            filteredTasksC = []
+            filteredTasksA = []
+            filteredTasksIDs = []
+            fpriorC = []
+            fcatC = []
+            festC = []
+            fpriorA = []
+            fcatA = []
+            festA = []
+
+            for task in tasksCAll:
+                if date == str(task["date"]):
+                    tasksC.append(task)
+                else:
+                    continue
+
+            for task in tasksAAll:
+                if date == str(task["date"]):
+                    tasksA.append(task)
+                else:
+                    continue
+
+            # Filtro por prioridad
+            if sol_prioridad != "-":
+                for task in tasksC:
+                    if sol_prioridad == str(task["priority"]):
+                        fpriorC.append(task["taskid"])
+                    else:
+                        continue
+
+                for task in tasksA:
+                    if sol_prioridad == str(task["priority"]):
+                        fpriorA.append(task["taskid"])
+                    else:
+                        continue
+            else:
+                for task in tasksC:
+                    fpriorC.append(task["taskid"])
+
+                for task in tasksA:
+                    fpriorA.append(task["taskid"])
+
+            # Filtro por categoria
+            if sol_categoria != "-":
+                for task in tasksC:
+                    if sol_categoria == str(task["categoria"]):
+                        fcatC.append(task["taskid"])
+                    else:
+                        continue
+
+                for task in tasksA:
+                    if sol_categoria == str(task["categoria"]):
+                        fcatA.append(task["taskid"])
+                    else:
+                        continue
+            else:
+                for task in tasksC:
+                    fcatC.append(task["taskid"])
+
+                for task in tasksA:
+                    fcatA.append(task["taskid"])
+
+            # Filtro por estado
+            if sol_estado != "-":
+                for task in tasksC:
+                    if sol_estado == str(task["estado"]):
+                        festC.append(task["taskid"])
+                    else:
+                        continue
+
+                for task in tasksA:
+                    if sol_estado == str(task["estado"]):
+                        festA.append(task["taskid"])
+                    else:
+                        continue
+            else:
+                for task in tasksC:
+                    festC.append(task["taskid"])
+
+                for task in tasksA:
+                    festA.append(task["taskid"])
+
+            # Filtrando entre listas filtradas de IDs
+            for currentID in fpriorC:
+                if currentID in fcatC and currentID in festC:
+                    filteredTasksIDs.append(currentID)
+
+            for currentID in fpriorA:
+                if currentID in fcatA and currentID in festA:
+                    filteredTasksIDs.append(currentID)
+
+            # Encontrando tareas
+            for task in tasksC:
+                if task["taskid"] in filteredTasksIDs:
+                    filteredTasksC.append(task)
+
+            for task in tasksA:
+                if task["taskid"] in filteredTasksIDs:
+                    filteredTasksA.append(task)
+
+            if session.get("date_tasksIDs"):
+                session.pop("date_tasksIDs")
+                print("Found a previos list and removed it!")
+
+            session["date_tasksIDs"] = filteredTasksIDs
+
+            print(filteredTasksC, filteredTasksA)
+            return render_template("dashboardToDo.html", userid=userid, username=username,
+                                   tasksC=filteredTasksC, tasksA=filteredTasksA, date=date,
+                                   categorias=categorias)
 
 
 if __name__ == "__main__":
