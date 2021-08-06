@@ -70,23 +70,22 @@
       <label for="payment-method-paypal"> <span><i class="fa fa-cc-paypal"></i>Paypal</span></label>
     </div>
     <div class="input-group input-group-icon">
-      <input type="text" placeholder="Nombre de tarjeta" />
+      <input type="text" placeholder="Nombre de tarjeta" name="nombreTarjeta" required />
       <div class="input-icon"><i class="fa fa-credit-card"></i></div>
     </div>
     <div class="input-group input-group-icon">
-      <input type="text" placeholder="Numero de tarjeta" />
+      <input type="text" placeholder="Numero de tarjeta" name="numeroTarjeta" required />
       <div class="input-icon"><i class="fa fa-credit-card"></i></div>
     </div>
     <div class="col-half">
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="CVC" />
+        <input type="text" placeholder="CVC" name="codigoTarjeta" required />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
     </div>
     <div class="col-half">
       <div class="input-group">
-        <input type="month" placeholder="Fecha de vencimiento">
-
+        <input type="month" placeholder="Fecha de vencimiento" name="vencimientoTarjeta" required />
       </div>
 
       <input id="campo3" name="enviar" type="submit" value="Registrarse">
