@@ -10,6 +10,7 @@
     <!-- link calendar resources -->
     <!-- <link rel="stylesheet" type="text/css" href="/static/styleGeneral.css" /> -->
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="/static/styleCalendar.css" />
     <link rel="stylesheet" type="text/css" href="/static/styleCalendar_Template.css" />
@@ -33,18 +34,48 @@
     <div class="row d-flex justify-content-center container">
         <div class="col-md-8">
             <div class="card-hover-shadow-2x mb-3 card">
-                <form action="{{url_for('checkTask')}}" method="POST">
+                <form action="{{url_for('filterTasks')}}" method="POST" id="formUPD-FIL">
                     <div class="card-header-tab card-header">
                         <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
                             <i class="fa fa-tasks"></i>&nbsp;{{username}}'s Task Lists
                             {% if date %}from {{date}}{% endif %}
                         </div>
-                        <div class="updateBTN">
+                        <div class="updateBTN" style="display: none;" id="updateBTN">
                             <input type="submit" name="update" value="Marcar tareas como hechas"
                                 class="btn btn-primary" />
                         </div>
-                        <div class="updateBTN">
+                        <div class="updateBTN" style="display: none;" id="deleteBTN">
                             <input type="submit" name="delete" value="Eliminar tareas" class="btn btn-primary" />
+                        </div>
+                        <div class="filters" style="display: block;" id="filtersInputs">
+                            <!-- Select -->
+                            <select class="custom-select-sm" size="1" style="opacity: 100;" name="filtroPrioridad">
+                                <option value="-" selected>Todas</option>
+                                <option value="Alta">Alta</option>
+                                <option value="Media">Media</option>
+                                <option value="Baja">Baja</option>
+                            </select>
+                            <!-- End Select -->
+
+                            <!-- Select -->
+                            <select class="custom-select-sm" size="1" style="opacity: 100;" name="filtroCategoria">
+                                <option value="-" selected>Todas</option>
+                                {% if categorias %}
+                                {% for categoria in categorias %}
+                                <option value="{{categoria.categoria}}">{{categoria.categoria}}</option>
+                                {% endfor %}
+                                {% endif %}
+                            </select>
+                            <!-- End Select -->
+
+                            <!-- Select -->
+                            <select class="custom-select-sm" size="1" style="opacity: 100;" name="filtroEstado">
+                                <option value="-" selected>Todas</option>
+                                <option value="0">Activas</option>
+                                <option value="1">Inactivas</option>
+                            </select>
+                            <!-- End Select -->
+                            <input type="submit" id="applyFilters" value="Aplicar filtros" class="btn btn-primary" />
                         </div>
                     </div>
                     <div class="scroll-area-sm">
@@ -64,11 +95,21 @@
                                                 <div class="widget-content-wrapper">
                                                     <div class="widget-content-left mr-2">
                                                         <div class="custom-checkbox custom-control">
+                                                            {% if task.estado == 0 %}
                                                             <input class="custom-control-input"
                                                                 id="tarea{{task.taskid}}" type="checkbox"
                                                                 value="{{task.taskid}}" name="tarea{{task.taskid}}">
                                                             <label class="custom-control-label"
                                                                 for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
+                                                            {% if task.estado == 1 %}
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}"
+                                                                disabled>
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-left">
@@ -104,11 +145,21 @@
                                                 <div class="widget-content-wrapper">
                                                     <div class="widget-content-left mr-2">
                                                         <div class="custom-checkbox custom-control">
+                                                            {% if task.estado == 0 %}
                                                             <input class="custom-control-input"
                                                                 id="tarea{{task.taskid}}" type="checkbox"
                                                                 value="{{task.taskid}}" name="tarea{{task.taskid}}">
                                                             <label class="custom-control-label"
                                                                 for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
+                                                            {% if task.estado == 1 %}
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}"
+                                                                disabled>
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-left">
@@ -145,11 +196,21 @@
                                                 <div class="widget-content-wrapper">
                                                     <div class="widget-content-left mr-2">
                                                         <div class="custom-checkbox custom-control">
+                                                            {% if task.estado == 0 %}
                                                             <input class="custom-control-input"
                                                                 id="tarea{{task.taskid}}" type="checkbox"
                                                                 value="{{task.taskid}}" name="tarea{{task.taskid}}">
                                                             <label class="custom-control-label"
                                                                 for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
+                                                            {% if task.estado == 1 %}
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}"
+                                                                disabled>
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-left flex2">
@@ -192,11 +253,21 @@
                                                 <div class="widget-content-wrapper">
                                                     <div class="widget-content-left mr-2">
                                                         <div class="custom-checkbox custom-control">
+                                                            {% if task.estado == 0 %}
                                                             <input class="custom-control-input"
                                                                 id="tarea{{task.taskid}}" type="checkbox"
                                                                 value="{{task.taskid}}" name="tarea{{task.taskid}}">
                                                             <label class="custom-control-label"
                                                                 for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
+                                                            {% if task.estado == 1 %}
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}"
+                                                                disabled>
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-left">
@@ -232,11 +303,21 @@
                                                 <div class="widget-content-wrapper">
                                                     <div class="widget-content-left mr-2">
                                                         <div class="custom-checkbox custom-control">
+                                                            {% if task.estado == 0 %}
                                                             <input class="custom-control-input"
                                                                 id="tarea{{task.taskid}}" type="checkbox"
                                                                 value="{{task.taskid}}" name="tarea{{task.taskid}}">
                                                             <label class="custom-control-label"
                                                                 for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
+                                                            {% if task.estado == 1 %}
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}"
+                                                                disabled>
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-left flex2">
@@ -273,11 +354,21 @@
                                                 <div class="widget-content-wrapper">
                                                     <div class="widget-content-left mr-2">
                                                         <div class="custom-checkbox custom-control">
+                                                            {% if task.estado == 0 %}
                                                             <input class="custom-control-input"
                                                                 id="tarea{{task.taskid}}" type="checkbox"
                                                                 value="{{task.taskid}}" name="tarea{{task.taskid}}">
                                                             <label class="custom-control-label"
                                                                 for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
+                                                            {% if task.estado == 1 %}
+                                                            <input class="custom-control-input"
+                                                                id="tarea{{task.taskid}}" type="checkbox"
+                                                                value="{{task.taskid}}" name="tarea{{task.taskid}}"
+                                                                disabled>
+                                                            <label class="custom-control-label"
+                                                                for="tarea{{task.taskid}}">&nbsp;</label>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="widget-content-left flex2">
@@ -317,6 +408,8 @@
                     </div>
                 </form>
                 <div class="d-block text-right card-footer">
+                    <button class="btn btn-primary" onclick="cambioDecision()" id="decisionboton">Filtrar
+                        tareas</button>
                     <a class="btn btn-primary" href="{{url_for('addtask')}}">Add Task</a>
                     <a class="btn btn-primary" href="{{url_for('dashboardUsers')}}">Check users</a>
                 </div>
@@ -332,7 +425,7 @@
 
     <script src='/static/scriptCalendar_Template.js'></script>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src="/static/scriptToDo.js"></script>
+    <script src="/static/scriptFilter.js"></script>
 </body>
 
 </html>
