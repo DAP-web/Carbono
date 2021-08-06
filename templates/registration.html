@@ -1,68 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="/static/styleRegistro.css">
-    <link rel="shortcut icon" href="/static/images/calendarImageLogo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+<title>Creative Colorlib SignUp Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link rel="stylesheet" type="text/css" href="/static/styleRegistro.css" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- //web font -->
 </head>
-
 <body>
-    <div class="contenedor">
-        <h3 class="titulo">Registro</h3>
-        <hr>
-        <div class="imagen">
-            <img id="registerimg" style="float: right; left: 50%; margin-left: -175px;"
-                src="/static/images/formulario.jpg" alt="Formulario llenado">
-        </div>
+    <div class="Titulo">
+    <h1>Registro</h1>
+    </div>
+	<div class="container">
+        <form>
+          <div class="row">
+            <h4>Account</h4>
+            <div class="input-group input-group-icon">
+              <input type="text" placeholder="Ingrese su correo electronico"/>
+              <div class="input-icon"><i class="fa fa-user"></i></div>
+            </div>
+            <div class="input-group input-group-icon">
+              <input type="email" placeholder="ingrese su usuario"/>
+              <div class="input-icon"><i class="fa fa-envelope"></i></div>
+            </div>
+            <div class="input-group input-group-icon">
+              <input type="password" placeholder="Contrasenia"/>
+              <div class="input-icon"><i class="fa fa-key"></i></div>
+            </div>
+             <div class = "conf-contra">
+            <input type="password" name="contraConf_reg" id="contraConf_reg" placeholder="Confirme su contraseña..."/>
+            <div class="input-icon"><i class="fa fa-key"></i></div>
+            </div>
 
-        <form class="cuerpo" action="{{url_for('registration')}}" method="POST">
-            <label for="correo_reg">Correo Electronico:</label><br>
-            <input type="email" name="correo_reg" id="correo_reg" placeholder="Ingrese su correo electronico..."
-                required>
+          </div>
 
+            </div>
             <br><br>
-
-            <label for="usuario_reg">Usuario:</label><br>
-            <input type="text" name="usuario_reg" id="usuario_reg" placeholder="Ingrese un nombre de usuario..."
-                required>
-            <br><br>
-
-            <label for="contra_reg">Contraseña:</label><br>
-            <input type="password" name="contra_reg" id="contra_reg" placeholder="Ingrese una contraseña..." required>
-            <br><br>
-
-            <label for="contraConf_reg">Confirmar contraseña:</label><br>
-            <input type="password" name="contraConf_reg" id="contraConf_reg" placeholder="Confirme su contraseña..."
-                required>
-            <br><br>
-
+            <div class="pm">
             <label for="adminORClient">¿Eres el PM de tu equipo?</label><br>
             <select name="adminORClient" id="adminORClient" required>
                 <option value="0">No</option>
                 <option value="1">Si</option>
             </select>
             <br><br>
+        </div>
+          </div>
+          <div class="row">
+            <h4>Payment Details</h4>
+            <div class="input-group">
+              <input type="radio" name="payment-method" value="card" id="payment-method-card" checked="true"/>
+              <label for="payment-method-card"><span><i class="fa fa-cc-visa"></i>Credit Card</span></label>
+              <input type="radio" name="payment-method" value="paypal" id="payment-method-paypal"/>
+              <label for="payment-method-paypal"> <span><i class="fa fa-cc-paypal"></i>Paypal</span></label>
+            </div>
+            <div class="input-group input-group-icon">
+              <input type="text" placeholder="Numero de tarjeta"/>
+              <div class="input-icon"><i class="fa fa-credit-card"></i></div>
+            </div>
+            <div class="col-half">
+              <div class="input-group input-group-icon">
+                <input type="text" placeholder="CVC"/>
+                <div class="input-icon"><i class="fa fa-user"></i></div>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="input-group">
+                <input type="month" placeholder="Fecha de vencimiento">
 
-            <input type="submit" value="Registrarse" class="button">
-            <br><br><br><br>
+              </div>
+ 
+        <input id="campo3" name="enviar" type="submit" value="Enviar" >
         </form>
 
-        <h4 class="cuerpo" id="logLink">Already have an account?
-            <a href="/login">Sign in here!</a>
-        </h4>
 
-    </div>
 
-    <!-- <div class="redLogin">
+      <h4 class="cuerpo" id="logLink">Already have an account?
+          <a href="/login">Sign in here!</a>
+      </h4>
+        </div>
+      </div>
+      </div><!-- main -->
 
-    </div> -->
-
-    <!-- <script src="/static/scriptRegistro.js"></script> -->
-    <!-- <script src="{{url_for('static', filename='scriptRegistro.js')}}"></script> -->
 </body>
-
 </html>
