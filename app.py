@@ -1,3 +1,4 @@
+from enum import IntFlag
 from flask import Flask, render_template, request, redirect, session
 from flask_cors import CORS, cross_origin
 import bcrypt
@@ -362,11 +363,24 @@ def checkTask():
                 selectedIDs.append(int(id))
 
         if request.form.get("update", False):
-            print("Aquí se irán a actualizar los estados a la BD")
+            logic = TaskLogic
+            rowsTotal = 0
+            for task in selectedIDs:
+                rows = logic.updateTask(task)
+                rowsTotal += rows
+            print(rowsTotal)
+            print("Rows affected:", rowsTotal, sep = " ")
 
             return redirect("todolist")
         elif request.form.get("delete", False):
-            print("Aquí se irán a eliminar las tareas a la BD")
+            logic = TaskLogic()
+            rowsTotal = 0
+            for task in selectedIDs:
+                rows = logic.deleteTask(task)
+                rowsTotal += rows
+            print(rowsTotal)
+
+            print("Rows affected:", rowsTotal, sep = " ")
             return redirect("todolist")
 
         print(selectedIDs)
