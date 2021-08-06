@@ -14,40 +14,30 @@
 
 <body>
 
-    <div class="contenedor">
-        <h3 class="titulo">Inicio de sesión</h3>
-        <hr>
-
-        <form class="cuerpo" action="{{url_for('login')}}" method="POST">
-            <label for="email">Correo Electronico:</label><br>
-            <input type="email" name="email" id="email" placeholder="Ingrese su correo electrónico...">
-            <br><br>
-
-            <label for="passw">Contraseña:</label><br>
-            <input type="password" name="passw" id="passw" placeholder="Ingrese contraseña...">
-            <br><br>
-
-            <div class="g-recaptcha" data-sitekey="6LdRpTIbAAAAAFxW88b00vZPoyt7Hd5c4RweFjaP"></div>
-            <br><br>
-
-            <input type="submit" value="Login" class="button">
-            <br><br><br>
-
+    <div class="body"></div>
+		<div class="grad"></div>
+		<div class="header">
+			<div>ToDo<span>List</span></div>
+		</div>
+		<br>
+		<div class="login">
+				<input type="text" placeholder="Correo Electrónico" name="user"><br>
+				<input type="password" placeholder="Contraseña" name="password"><br>
+                <div class="g-recaptcha" data-sitekey="6LdRpTIbAAAAAFxW88b00vZPoyt7Hd5c4RweFjaP"></div>
+				<input type="button" value="Iniciar Sesión">
+		
             <div class="redregister">
                 <h4 id="regLink">¿No tienes una cuenta?
-                    <a href="/registration">Regístrate</a>
+                <a href="/registration">Regístrate</a>
                 </h4>
             </div>
-        </form>
 
+        <div class="goBack">
+            <a href="/">Regresar</a>
+        </div>
     </div>
 
-    <div class="goBack">
-        <a href="/">Regresar</a>
-    </div>
-
-    <!-- <script src="/static/scriptLogin.js"></script> -->
-    <!-- <script src="{{url_for('static', filename='scriptLogin.js')}}"></script> -->
+    
 </body>
 
 </html>
