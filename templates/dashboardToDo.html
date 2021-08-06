@@ -34,20 +34,20 @@
     <div class="row d-flex justify-content-center container">
         <div class="col-md-8">
             <div class="card-hover-shadow-2x mb-3 card">
-                <form action="{{url_for('filterTasks')}}" method="POST" id="formUPD-FIL">
+                <form action="{{url_for('checkTask')}}" method="POST" id="formUPD-FIL">
                     <div class="card-header-tab card-header">
                         <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
                             <i class="fa fa-tasks"></i>&nbsp;{{username}}'s Task Lists
                             {% if date %}from {{date}}{% endif %}
                         </div>
-                        <div class="updateBTN" style="display: none;" id="updateBTN">
+                        <div class="updateBTN" style="display: block;" id="updateBTN">
                             <input type="submit" name="update" value="Marcar tareas como hechas"
                                 class="btn btn-primary" />
                         </div>
-                        <div class="updateBTN" style="display: none;" id="deleteBTN">
+                        <div class="deleteBTN" style="display: block;" id="deleteBTN">
                             <input type="submit" name="delete" value="Eliminar tareas" class="btn btn-primary" />
                         </div>
-                        <div class="filters" style="display: block;" id="filtersInputs">
+                        <div class="filters" style="display: none;" id="filtersInputs">
                             <!-- Select -->
                             <select class="custom-select-sm" size="1" style="opacity: 100;" name="filtroPrioridad">
                                 <option value="-" selected>Todas</option>
@@ -75,7 +75,7 @@
                                 <option value="1">Inactivas</option>
                             </select>
                             <!-- End Select -->
-                            <input type="submit" id="applyFilters" value="Aplicar filtros" class="btn btn-primary" />
+                            <input type="submit" id="applyFilters" value="Aplicar" class="btn btn-primary" />
                         </div>
                     </div>
                     <div class="scroll-area-sm">
