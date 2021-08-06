@@ -23,6 +23,8 @@
   <div class="container">
     <form action="{{url_for('registration')}}" method="POST">
       <div class="row">
+        <h5>Nota: No se almacenará la información de su tarjeta, solamente se utilizará para hacer el cobro por la
+          subscripción.</h5>
         <h4>Account
           {% if message %}||
           <span style="color: red; font-weight:bold;">
