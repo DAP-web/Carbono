@@ -1,83 +1,160 @@
-body {
-    background-color:#e4b1a5;
-  }
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
 
-.contenedor {
-  margin: absolute;
-}
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
 
-.titulo {
-    color:#59371c;
-    text-align: center;
-    font-family: Garamond, serif;
-    font-weight: bold;
-    font-size: xx-large;
-    letter-spacing: 10pt;
-  }
-
-.cuerpo {
-  color: #59371c;
-  padding-right: 30%;
-  padding-left: 30%;
-  text-align: center;
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
 }
 
-input[type=email] {
-    width: 50%;
-    padding: 10px 5px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #555;
-    outline: none;
-    }
-    input[type=email]:focus {
-    background-color:#59371c;
-    }
-
-Input[type="password"] {
-  width: 50%;
-  padding: 10px 5px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 1px solid #555;
-  outline: none;
-}
-input[type="password"]:focus {
-  background-color:#59371c;
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-image: url(https://www.learnchile.cl/wp-content/uploads/2020/05/iStock-1133557365-1174x694.jpg);
+	background-size: cover;
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+	z-index: 0;
 }
 
-.button {
-  background-color: white;
-  border: none;
-  border-radius: 12px;
-  color: #050404;
-  padding: 10px 8px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 2px 1px;
-  transition-duration: 0.4s;
-  cursor: pointer;
+.grad{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: 1;
+	opacity: 0.7;
 }
-.button {
-  background-color: white;
-  color:  #59371c;
-  border: 1px solid  #59371c;
+
+.header{
+	position: absolute;
+	top: calc(60% - 35px);
+	left: calc(50% - 255px);
+	z-index: 2;
 }
-.button:hover {
-  background-color: #59371c;
-  color: white;
+
+.header div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	font-weight: 200;
 }
+
+.header div span{
+	color: #685b47 !important;
+	font-weight: bold;
+
+}
+
+.login{
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
+}
+
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
+
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.login input[type=button]{
+	width: 260px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 1px;
+}
+
+.login input[type=button]:hover{
+	opacity: 0.8;
+}
+
+.login input[type=button]:active{
+	opacity: 0.6;
+}
+
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=button]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+.g-recaptcha {
+	transform:scale(0.77);
+	transform-origin:0 0;
+	margin-top: 10px;
+	margin-left: 16px;
+}
+
 .redregister {
-    color: #59371c;
-    padding-right: 30%;
-    padding-left: 30%;  
+	padding-left: 10%;
+    color: #fff;
   }
 
 .goBack {
-    color: #59371c;
-    padding-right: 30%;
-    padding-left: 30%;
-    text-align: center;  
+    color: #fff;
+	padding-left: 30%;
   }
