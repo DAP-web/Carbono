@@ -265,6 +265,7 @@ def peakTasks():
             username = session.get("login_user_name")
             tasks = logic.getAllTasksByUser(userid)
             dateTasks = []
+            tasksIDs = []
 
             date = request.form["date"]
             month = date[0:2]
@@ -276,8 +277,16 @@ def peakTasks():
             for task in tasks:
                 if date == str(task["date"]):
                     dateTasks.append(task)
+                    tasksIDs.append(task["taskid"])
                 else:
                     continue
+
+            if session.get("date_tasksIDs"):
+                session.pop("date_tasksIDs")
+                print("Found a previos list and removed it!")
+
+            session["date_tasksIDs"] = tasksIDs
+
             print(dateTasks)
             return render_template("todolist.html", userid=userid, username=username, tasks=dateTasks, date = date)
         elif int(session.get("login_user_CA")) == 1:
@@ -354,46 +363,15 @@ def checkTask():
 
         if request.form.get("update", False):
             print("Aquí se irán a actualizar los estados a la BD")
+
+            return redirect("todolist")
         elif request.form.get("delete", False):
             print("Aquí se irán a eliminar las tareas a la BD")
+            return redirect("todolist")
 
         print(selectedIDs)
         return redirect("peakTasks")
 
-""" @app.route("/removeTask")
-def removeTask():
-    logic = UserLogic()
-    userid = session.get("login_user_id")
-    username = session.get("login_user_name")
 
-    users = logic.getAllTasksByUser()
-    
-    print("Redirecting", username, userid, "to remove task", sep = " ")
-    return render_template("todolist.html", userid=userid, username=username, users=users)
-
-@app.route("/removeTaskBD", methods=["GET", "POST"])
-def removeUserBD():
-    if request.method == "GET":
-        return render_template("todolist.html")
-    elif request.method == "POST":
-        logic = TaskLogic()
-
-        tasks = session.get("usersDash")
-        idtask = 0
-
-        for task in tasks:
-            name = "user" + str(task)
-            print(name)
-            deleteTaskID = request.form.get(name, False)
-            print(deleteTaskID)
-            if deleteTaskID:
-                idtask = tasks
-
-        print(idtask)
-        rows = logic.deleteTask(idtask)
-
-        print("Rows affected:", rows, sep = " ")
-        return redirect('dashboardUsers')
- """
 if __name__ == "__main__":
     app.run(debug=True)
