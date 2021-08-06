@@ -62,7 +62,12 @@
   </div>
   </div>
   <div class="row">
-    <h4>Payment Details</h4>
+    <h4>Payment Details ||
+      {% if messageFailureTarjeta %}
+      <span style="color: red; font-weight: bold;">{{messageFailureTarjeta}}
+      </span>
+      {% endif %}
+    </h4>
     <div class="input-group">
       <input type="radio" name="payment-method" value="card" id="payment-method-card" checked="true" />
       <label for="payment-method-card"><span><i class="fa fa-cc-visa"></i>Credit Card</span></label>
@@ -88,7 +93,7 @@
         <input type="month" placeholder="Fecha de vencimiento" name="vencimientoTarjeta" required />
       </div>
 
-  <input  class="boton" id="campo3" name="enviar" type="submit" value="Registrarse">
+      <input class="boton" id="campo3" name="enviar" type="submit" value="Registrarse">
       </form>
 
 
