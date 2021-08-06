@@ -42,8 +42,15 @@ def login():
                 logic = UserLogic()
                 email = request.form["email"]
                 passwd = request.form["passw"]
+
                 userDict = logic.getUserByEmail(email)
+
+                if isinstance(userDict, list):
+                    message = "El correo o la contraseña son incorrectos. Verifica y vuelve a probar"
+                    return render_template("login.html", message=message)
+
                 salt = userDict["salt"].encode("utf-8")
+
                 hashPasswd = bcrypt.hashpw(passwd.encode("utf-8"), salt)
                 dbPasswd = userDict["password"].encode("utf-8")
                 if hashPasswd == dbPasswd:
@@ -60,15 +67,15 @@ def login():
                     elif userDict["admin"] == 1:
                         print("admin -> dashboard")
                         return redirect("dashboard")
-                    else:
-                        print("Algo anda mal papi!")
-                        return redirect("dashboard")
                 else:
-                    return redirect("login")
+                    message = "El correo o la contraseña son incorrectos. Verifica y vuelve a probar"
+                    return render_template("login.html", message=message)
             else:
-                return redirect("login")
+                message = "¡Algo salio mal! Vuelve a probar"
+                return render_template("login.html", message=message)
         else:
-            return redirect("login")
+            message = "¡Algo salio mal! Vuelve a probar"
+            return render_template("login.html", message=message)
 
 
 @app.route("/logout")
@@ -108,14 +115,19 @@ def registration():
 
             strSalt = salt.decode("utf-8")
             strPswd = hashpswd.decode("utf-8")
+            try:
+                rows = logic.insertUser(
+                    username, email, strPswd, strSalt, admin)
+            except:
+                message = "¡Ese correo ya existe!"
+                return render_template("registration.html", message=message)
 
-            rows = logic.insertUser(username, email, strPswd, strSalt, admin)
             print("Rows affected:", rows, sep=" ")
 
             return redirect("login")
         else:
             message = "Las contraseñas no coinciden. Verifique y vuelva a intentar."
-            return redirect("registration", message=message)
+            return render_template("registration.html", message=message)
 
 
 @app.route("/dashboardUsers")
@@ -274,26 +286,29 @@ def peakTasks():
         elif int(session.get("login_user_CA")) == 1:
             return redirect("dashboard")
     elif request.method == "POST":
+        userid = session.get("login_user_id")
+        username = session.get("login_user_name")
+
+        logic = TaskLogic()
+
+        date = request.form["date"]
+        month = date[0:2]
+        day = date[3:5]
+        year = date[6:]
+        date = year + "-" + month + "-" + day
+        print(date)
+
+        if session.get("current_date"):
+            session.pop("current_date")
+            print("Found a previos date and removed it!")
+
+        session["current_date"] = date
+
+        categorias = logic.traerCategorias()
+
         if int(session.get("login_user_CA")) == 0:
-            logic = TaskLogic()
-            userid = session.get("login_user_id")
-            username = session.get("login_user_name")
             tasks = logic.getAllTasksByUser(userid)
-            dateTasks = []
-            tasksIDs = []
-
-            date = request.form["date"]
-            month = date[0:2]
-            day = date[3:5]
-            year = date[6:]
-            date = year + "-" + month + "-" + day
-            print(date)
-
-            if session.get("current_date"):
-                session.pop("current_date")
-                print("Found a previos date and removed it!")
-
-            session["current_date"] = date
+            dateTasks, tasksIDs = [[], []]
 
             for task in tasks:
                 if date == str(task["date"]):
@@ -308,33 +323,13 @@ def peakTasks():
 
             session["date_tasksIDs"] = tasksIDs
 
-            categorias = logic.traerCategorias()
-
             print(dateTasks)
-            return render_template("todolist.html", userid=userid, username=username, tasks=dateTasks, date=date, categorias=categorias)
+            return render_template("todolist.html", userid=userid, username=username,
+                                   tasks=dateTasks, date=date, categorias=categorias)
         elif int(session.get("login_user_CA")) == 1:
-            logic = TaskLogic()
-
-            userid = session.get("login_user_id")
-            username = session.get("login_user_name")
             tasksC = logic.getAllTasksClients()
             tasksA = logic.getAllTasksByUser(userid)
-            dateTasksC = []
-            dateTasksA = []
-            tasksIDs = []
-
-            date = request.form["date"]
-            month = date[0:2]
-            day = date[3:5]
-            year = date[6:]
-            date = year + "-" + month + "-" + day
-            print(date)
-
-            if session.get("current_date"):
-                session.pop("current_date")
-                print("Found a previos date and removed it!")
-
-            session["current_date"] = date
+            dateTasksC, dateTasksA, tasksIDs = [[], [], []]
 
             for task in tasksC:
                 if date == str(task["date"]):
@@ -356,12 +351,9 @@ def peakTasks():
 
             session["date_tasksIDs"] = tasksIDs
 
-            categorias = logic.traerCategorias()
-
             print(dateTasksC, dateTasksA)
-            return render_template("dashboardToDo.html", userid=userid, username=username, tasksC=dateTasksC, tasksA=dateTasksA, date=date, categorias=categorias)
-        # else:
-        #     return redirect('todolist')
+            return render_template("dashboardToDo.html", userid=userid, username=username,
+                                   tasksC=dateTasksC, tasksA=dateTasksA, date=date, categorias=categorias)
 
 
 @app.route("/beneficios")
@@ -393,40 +385,33 @@ def checkTask():
             print(id)
             if id:
                 selectedIDs.append(int(id))
+        print(selectedIDs)
+
+        logic = TaskLogic()
+        rowsTotal = 0
 
         if request.form.get("update", False):
-            logic = TaskLogic
-            rowsTotal = 0
-            for task in selectedIDs:
-                rows = logic.updateTask(task)
+            for currentID in selectedIDs:
+                rows = logic.updateTask(currentID)
                 rowsTotal += rows
-            print(rowsTotal)
-            print("Rows affected:", rowsTotal, sep=" ")
 
+            print("Rows affected:", rowsTotal, sep=" ")
             return redirect("todolist")
+
         elif request.form.get("delete", False):
-            logic = TaskLogic()
-            rowsTotal = 0
-            for task in selectedIDs:
-                rows = logic.deleteTask(task)
+            for currentID in selectedIDs:
+                rows = logic.deleteTask(currentID)
                 rowsTotal += rows
-            print(rowsTotal)
 
             print("Rows affected:", rowsTotal, sep=" ")
             return redirect("todolist")
-
-        print(selectedIDs)
-        return redirect("peakTasks")
 
 
 @app.route("/filterTasks", methods=["GET", "POST"])
 def filterTasks():
-    print("Llega aqui")
     if request.method == "GET":
-        print("Se mete a Get")
         return redirect("todolist")
     elif request.method == "POST":
-        print("se mete a POST")
         logic = TaskLogic()
 
         # Recuperando informacion sobre el usuario
@@ -436,42 +421,87 @@ def filterTasks():
         # Pidiendo la fecha a aplicar los filtros
         date = session.get("current_date")
 
-        # Construyendo listas con opciones de filtros
-        prioridades = ["Alta", "Media", "Baja"]
-
         categorias = logic.traerCategorias()
-        listaCat = []
-        for categoria in categorias:
-            listaCat.append(categoria["categoria"])
-
-        estados = [0, 1]
 
         # Recuperando Informacion del form
         sol_prioridad = request.form["filtroPrioridad"]
         sol_categoria = request.form["filtroCategoria"]
         sol_estado = request.form["filtroEstado"]
 
-        print(type(sol_prioridad), type(
-            sol_categoria), type(sol_estado))
-
+        # Comprobando si es Cliente o Administrador
         if int(session.get("login_user_CA")) == 0:
-            tasks = logic.getAllTasksByUser(userid)
+            tasksAll = logic.getAllTasksByUser(userid)
+            tasks, filteredTasks, filteredTasksIDs = [[], [], []]
+            fprior, fcat, fest = [[], [], []]
+
+            # Verificando fecha de las tareas
+            for task in tasksAll:
+                if date == str(task["date"]):
+                    tasks.append(task)
+                else:
+                    continue
+            # Filtro por prioridad
+            if sol_prioridad != "-":
+                for task in tasks:
+                    if sol_prioridad == str(task["priority"]):
+                        fprior.append(task["taskid"])
+                    else:
+                        continue
+            else:
+                for task in tasks:
+                    fprior.append(task["taskid"])
+
+            # Filtro por categoria
+            if sol_categoria != "-":
+                for task in tasks:
+                    if sol_categoria == str(task["categoria"]):
+                        fcat.append(task["taskid"])
+                    else:
+                        continue
+            else:
+                for task in tasks:
+                    fcat.append(task["taskid"])
+
+            # Filtro por estado
+            if sol_estado != "-":
+                for task in tasks:
+                    if sol_estado == str(task["estado"]):
+                        fest.append(task["taskid"])
+                    else:
+                        continue
+            else:
+                for task in tasks:
+                    fest.append(task["taskid"])
+
+            # Filtrando entre listas filtradas de IDs
+            for currentID in fprior:
+                if currentID in fcat and currentID in fest:
+                    filteredTasksIDs.append(currentID)
+
+            # Encontrando tareas
+            for task in tasks:
+                if task["taskid"] in filteredTasksIDs:
+                    filteredTasks.append(task)
+
+            if session.get("date_tasksIDs"):
+                session.pop("date_tasksIDs")
+                print("Found a previos list and removed it!")
+
+            session["date_tasksIDs"] = filteredTasksIDs
+
+            print(filteredTasks)
+            return render_template("todolist.html", userid=userid, username=username,
+                                   tasks=tasks, date=date, categorias=categorias)
 
         elif int(session.get("login_user_CA")) == 1:
             tasksCAll = logic.getAllTasksClients()
             tasksAAll = logic.getAllTasksByUser(userid)
-            tasksC = []
-            tasksA = []
-            filteredTasksC = []
-            filteredTasksA = []
-            filteredTasksIDs = []
-            fpriorC = []
-            fcatC = []
-            festC = []
-            fpriorA = []
-            fcatA = []
-            festA = []
+            tasksC, tasksA = [[], []]
+            filteredTasksC, filteredTasksA, filteredTasksIDs = [[], [], []]
+            fpriorC, fcatC, festC = [[], [], []]
+            fpriorA, fcatA, festA = [[], [], []]
 
+            # Verificando fecha de las tareas
             for task in tasksCAll:
                 if date == str(task["date"]):
                     tasksC.append(task)
@@ -568,7 +598,7 @@ def filterTasks():
 
             session["date_tasksIDs"] = filteredTasksIDs
 
-            print(filteredTasksC, filteredTasksA)
+            print(filteredTasksC, filteredTasksA, sep="|**|")
             return render_template("dashboardToDo.html", userid=userid, username=username,
                                    tasksC=filteredTasksC, tasksA=filteredTasksA, date=date,
                                    categorias=categorias)

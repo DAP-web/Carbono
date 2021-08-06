@@ -1,90 +1,102 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Creative Colorlib SignUp Form</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Custom Theme files -->
-<link rel="stylesheet" type="text/css" href="/static/styleRegistro.css" />
-<!-- //Custom Theme files -->
-<!-- web font -->
-<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-<!-- //web font -->
+  <title>Registro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script
+    type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+  <!-- Custom Theme files -->
+  <link rel="stylesheet" type="text/css" href="/static/styleRegistro.css" />
+  <!-- //Custom Theme files -->
+  <!-- web font -->
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+  <!-- //web font -->
+  <link rel="shortcut icon" href="/static/images/calendarImageLogo.png" />
 </head>
+
 <body>
-    <div class="Titulo">
+  <div class="Titulo">
     <h1>Registro</h1>
-    </div>
-	<div class="container">
-        <form>
-          <div class="row">
-            <h4>Account</h4>
-            <div class="input-group input-group-icon">
-              <input type="text" placeholder="Ingrese su correo electronico"/>
-              <div class="input-icon"><i class="fa fa-user"></i></div>
-            </div>
-            <div class="input-group input-group-icon">
-              <input type="email" placeholder="ingrese su usuario"/>
-              <div class="input-icon"><i class="fa fa-envelope"></i></div>
-            </div>
-            <div class="input-group input-group-icon">
-              <input type="password" placeholder="Contrasenia"/>
-              <div class="input-icon"><i class="fa fa-key"></i></div>
-            </div>
-             <div class = "conf-contra">
-            <input type="password" name="contraConf_reg" id="contraConf_reg" placeholder="Confirme su contraseña..."/>
-            <div class="input-icon"><i class="fa fa-key"></i></div>
-            </div>
-
-          </div>
-
-            </div>
-            <br><br>
-            <div class="pm">
-            <label for="adminORClient">¿Eres el PM de tu equipo?</label><br>
-            <select name="adminORClient" id="adminORClient" required>
-                <option value="0">No</option>
-                <option value="1">Si</option>
-            </select>
-            <br><br>
+  </div>
+  <div class="container">
+    <form action="{{url_for('registration')}}" method="POST">
+      <div class="row">
+        <h4>Account
+          {% if message %}||
+          <span style="color: red; font-weight:bold;">
+            {{message}}
+          </span>
+          {% endif %}
+        </h4>
+        <div class="input-group input-group-icon">
+          <input type="email" placeholder="Ingrese su correo electronico" name="correo_reg" required />
+          <div class="input-icon"><i class="fa fa-user"></i></div>
         </div>
-          </div>
-          <div class="row">
-            <h4>Payment Details</h4>
-            <div class="input-group">
-              <input type="radio" name="payment-method" value="card" id="payment-method-card" checked="true"/>
-              <label for="payment-method-card"><span><i class="fa fa-cc-visa"></i>Credit Card</span></label>
-              <input type="radio" name="payment-method" value="paypal" id="payment-method-paypal"/>
-              <label for="payment-method-paypal"> <span><i class="fa fa-cc-paypal"></i>Paypal</span></label>
-            </div>
-            <div class="input-group input-group-icon">
-              <input type="text" placeholder="Numero de tarjeta"/>
-              <div class="input-icon"><i class="fa fa-credit-card"></i></div>
-            </div>
-            <div class="col-half">
-              <div class="input-group input-group-icon">
-                <input type="text" placeholder="CVC"/>
-                <div class="input-icon"><i class="fa fa-user"></i></div>
-              </div>
-            </div>
-            <div class="col-half">
-              <div class="input-group">
-                <input type="month" placeholder="Fecha de vencimiento">
+        <div class="input-group input-group-icon">
+          <input type="text" placeholder="ingrese su usuario" name="usuario_reg" required />
+          <div class="input-icon"><i class="fa fa-envelope"></i></div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input type="password" placeholder="Contrasenia" name="contra_reg" required />
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
+        <div class="conf-contra">
+          <input type="password" name="contraConf_reg" id="contraConf_reg" placeholder="Confirme su contraseña..."
+            required />
+          <div class="input-icon"><i class="fa fa-key"></i></div>
+        </div>
 
-              </div>
- 
-        <input id="campo3" name="enviar" type="submit" value="Enviar" >
-        </form>
+      </div>
+
+  </div>
+  <br><br>
+  <div class="pm">
+    <label for="adminORClient">¿Eres el PM de tu equipo?</label><br>
+    <select name="adminORClient" id="adminORClient" required>
+      <option value="0">No</option>
+      <option value="1">Si</option>
+    </select>
+    <br><br>
+  </div>
+  </div>
+  <div class="row">
+    <h4>Payment Details</h4>
+    <div class="input-group">
+      <input type="radio" name="payment-method" value="card" id="payment-method-card" checked="true" />
+      <label for="payment-method-card"><span><i class="fa fa-cc-visa"></i>Credit Card</span></label>
+      <input type="radio" name="payment-method" value="paypal" id="payment-method-paypal" />
+      <label for="payment-method-paypal"> <span><i class="fa fa-cc-paypal"></i>Paypal</span></label>
+    </div>
+    <div class="input-group input-group-icon">
+      <input type="text" placeholder="Numero de tarjeta" />
+      <div class="input-icon"><i class="fa fa-credit-card"></i></div>
+    </div>
+    <div class="col-half">
+      <div class="input-group input-group-icon">
+        <input type="text" placeholder="CVC" />
+        <div class="input-icon"><i class="fa fa-user"></i></div>
+      </div>
+    </div>
+    <div class="col-half">
+      <div class="input-group">
+        <input type="month" placeholder="Fecha de vencimiento">
+
+      </div>
+
+      <input id="campo3" name="enviar" type="submit" value="Registrarse">
+      </form>
 
 
 
       <h4 class="cuerpo" id="logLink">Already have an account?
-          <a href="/login">Sign in here!</a>
+        <a href="/login">Sign in here!</a>
       </h4>
-        </div>
-      </div>
-      </div><!-- main -->
+    </div>
+  </div>
+  </div><!-- main -->
 
 </body>
+
 </html>

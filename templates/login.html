@@ -15,29 +15,37 @@
 <body>
 
     <div class="body"></div>
-		<div class="grad"></div>
-		<div class="header">
-			<div>ToDo<span>List</span></div>
-		</div>
-		<br>
-		<div class="login">
-				<input type="text" placeholder="Correo Electrónico" name="user"><br>
-				<input type="password" placeholder="Contraseña" name="password"><br>
-                <div class="g-recaptcha" data-sitekey="6LdRpTIbAAAAAFxW88b00vZPoyt7Hd5c4RweFjaP"></div>
-				<input type="button" value="Iniciar Sesión">
-		
-            <div class="redregister">
-                <h4 id="regLink">¿No tienes una cuenta?
+    <div class="grad"></div>
+    <div class="header">
+        <div>ToDo<span>List</span></div>
+    </div>
+    <br>
+    
+    <div class="login">
+        <h3 style="color: red; font-weight: bold;">
+            {% if message %}
+                {{message}}
+            {% endif %}
+        </h3>
+        <form action="{{url_for('login')}}" method="POST">
+            <input type="text" placeholder="Correo Electrónico" name="email"><br>
+            <input type="password" placeholder="Contraseña" name="passw"><br>
+            <div class="g-recaptcha" data-sitekey="6LdRpTIbAAAAAFxW88b00vZPoyt7Hd5c4RweFjaP"></div>
+            <input type="submit" value="Iniciar Sesión">
+        </form>
+
+        <div class="redregister">
+            <h4 id="regLink">¿No tienes una cuenta?
                 <a href="/registration">Regístrate</a>
-                </h4>
-            </div>
+            </h4>
+        </div>
 
         <div class="goBack">
             <a href="/">Regresar</a>
         </div>
     </div>
 
-    
+
 </body>
 
 </html>
