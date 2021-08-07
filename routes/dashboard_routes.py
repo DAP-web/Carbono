@@ -22,7 +22,9 @@ class DashboardRoutes:
 
                 dataJson = []
                 # Recovering tip from API
+                messageAPIFailure_tip = ""
                 tipsIDs = []
+                randomtip = {}
                 restapi = "https://apicarbono.herokuapp.com"
                 endpoint = "/contenido"
                 categoriasapi = ["/Libro", "/Consejos", "/Charla"]
@@ -35,24 +37,28 @@ class DashboardRoutes:
                 if response.status_code == 200:
                     dataJson = response.json()
 
-                for tip in dataJson:
-                    tipsIDs.append(tip["id"])
+                    for tip in dataJson:
+                        tipsIDs.append(tip["id"])
 
-                randomtipid = random.choice(tipsIDs)
-                randomtip = {}
+                    randomtipid = random.choice(tipsIDs)
 
-                for tip in dataJson:
-                    if int(tip["id"]) == randomtipid:
-                        randomtip = tip
+                    for tip in dataJson:
+                        if int(tip["id"]) == randomtipid:
+                            randomtip = tip
 
-                print("Escogido", randomtip, sep="||")
+                    print("Escogido", randomtip, sep="||")
+
+                else:
+                    messageAPIFailure_tip = "No hay recomendación por el momento. Recarga la página si deseas volver a probar."
 
                 # Recovering trainer from API
                 trainerIDs = []
+                randomtrainer = {}
+                messageAPIFailure_trainer = ""
                 restapi = "https://apicarbono.herokuapp.com"
                 endpoint = "/trainers"
                 categoriasapi = ["/Efectividad", "/Liderazgo",
-                                 "/Organizacion", "/Productividad"]
+                                "/Organizacion", "/Productividad"]
                 categoriaapi = random.choice(categoriasapi)
 
                 url = f"{restapi}{endpoint}{categoriaapi}"
@@ -62,20 +68,24 @@ class DashboardRoutes:
                 if response.status_code == 200:
                     dataJson = response.json()
 
-                for trainer in dataJson:
-                    trainerIDs.append(trainer["id"])
+                    for trainer in dataJson:
+                        trainerIDs.append(trainer["id"])
 
-                randomtrainerid = random.choice(trainerIDs)
-                randomtrainer = {}
+                    randomtrainerid = random.choice(trainerIDs)
+                    
 
-                for trainer in dataJson:
-                    if int(trainer["id"]) == randomtrainerid:
-                        randomtrainer = trainer
+                    for trainer in dataJson:
+                        if int(trainer["id"]) == randomtrainerid:
+                            randomtrainer = trainer
 
-                print("Escogido", randomtrainer, sep="||")
+                    print("Escogido", randomtrainer, sep="||")
+                else:
+                    messageAPIFailure_trainer = "No hay trainer por el momento. Recarga la página si deseas volver a probar."
+
 
                 return render_template("dashboardToDo.html", userid=userid, username=username,
-                                       recomendacion=randomtip, trainer=randomtrainer)
+                                       recomendacion=randomtip, trainer=randomtrainer,
+                                failTip = messageAPIFailure_tip, failTrainer = messageAPIFailure_trainer)
             else:
                 print("Didn't find a session. Redirecting to Login!")
                 return redirect("login")
