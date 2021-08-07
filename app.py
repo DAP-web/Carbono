@@ -1,10 +1,5 @@
-# from enum import IntFlag
-from flask import Flask  # , render_template, request, redirect, session
+from flask import Flask
 from flask_cors import CORS, cross_origin
-# import bcrypt
-# import requests
-# from logic.userLogic import UserLogic
-# from logic.tasksLogic import TaskLogic
 from routes.main_routes import MainRoutes
 from routes.login_routes import LoginRoutes
 from routes.registration_routes import RegisterRoutes
