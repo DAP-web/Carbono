@@ -6,7 +6,7 @@ body {
     line-height: 1.5;
     color: #495057;
     text-align: left;
-    background-color: #6200EA;
+    background-color: #c9b0ec;
 }
 
 i {
@@ -138,7 +138,7 @@ i {
 }
 
 .btn-outline-success {
-    color: #3ac47d;
+    color: #7bc7a0;
     border-color: #3ac47d
 }
 
@@ -232,19 +232,19 @@ h4#tituloTip {
 
 h5#nombreTip, h6#descTip {
     margin: 0% 3% 3% 3%;
-    color: #EA0E0E;
+    color: #ffffff;
     font-weight: bold;
 }
 
 footer#footerTip {
     margin: 0% 3% 3% 3%;
-    color: #EA0E0E;
+    color: #fffefe;
     text-align: right;
     font-weight: bold;
 }
 
 .innerContainerTip {
-    background-color: #99EA0E;
+    background-color: #418bcf;
     margin: 3%;
     padding: 2%;
 }
