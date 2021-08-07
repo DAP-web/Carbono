@@ -1,3 +1,7 @@
 Flask
+flask_cors
 PyMySQL
+requests
+random
+bcrypt
 gunicorn
