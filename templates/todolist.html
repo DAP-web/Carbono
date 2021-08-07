@@ -260,8 +260,29 @@
         <a class="btn btn-primary" href="{{url_for('logout')}}">Logout</a>
     </div>
 
+    <div class="containerTip">
+        <h4 id="tituloTip">Recomendación del día:</h4>
+        <div class="innerContainerTip">
+            <h5 id="nombreTip">{{recomendacion.nombre}}</h5>
+            <h6 id="descTip">{{recomendacion.descripcion}}</h6>
+            <footer id="footerTip">{{recomendacion.autor}} ({{recomendacion.fecha}})<br>
+                <a href="{{recomendacion.enlace}}" target="_blank"><strong>Ver más</strong></a>
+            </footer>
+        </div>
+    </div>
 
-
+    <div class="containerTrainer">
+        <h4 id="tituloTip">Trainer recomendado:</h4>
+        <div class="innerContainerTip">
+            <h5 id="nombreTip">{{trainer.nombre}}</h5>
+            <h6 id="descTip">{{trainer.descripcion}}</h6>
+            <footer id="footerTip">
+                <a href="{{trainer.enlace}}" target="_blank">
+                    <strong>Contactarlo</strong>
+                </a>
+            </footer>
+        </div>
+    </div>
 
     <script src='/static/scriptCalendar_Template.js'></script>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>

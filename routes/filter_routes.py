@@ -1,5 +1,7 @@
 from flask import render_template, redirect, request, session
 from logic.tasksLogic import TaskLogic
+import random
+import requests
 
 
 class FilterRoutes:
@@ -28,6 +30,60 @@ class FilterRoutes:
                 sol_estado = request.form["filtroEstado"]
 
                 print(sol_prioridad, sol_categoria, sol_estado)
+
+                dataJson = []
+                # Recovering tip from API
+                tipsIDs = []
+                restapi = "https://apicarbono.herokuapp.com"
+                endpoint = "/contenido"
+                categoriasapi = ["/Libro", "/Consejos", "/Charla"]
+                categoriaapi = random.choice(categoriasapi)
+
+                url = f"{restapi}{endpoint}{categoriaapi}"
+
+                response = requests.get(url)
+                print(response)
+                if response.status_code == 200:
+                    dataJson = response.json()
+
+                for tip in dataJson:
+                    tipsIDs.append(tip["id"])
+
+                randomtipid = random.choice(tipsIDs)
+                randomtip = {}
+
+                for tip in dataJson:
+                    if int(tip["id"]) == randomtipid:
+                        randomtip = tip
+
+                print("Escogido", randomtip, sep="||")
+
+                # Recovering trainer from API
+                trainerIDs = []
+                restapi = "https://apicarbono.herokuapp.com"
+                endpoint = "/trainers"
+                categoriasapi = ["/Efectividad", "/Liderazgo",
+                                 "/Organizacion", "/Productividad"]
+                categoriaapi = random.choice(categoriasapi)
+
+                url = f"{restapi}{endpoint}{categoriaapi}"
+
+                response = requests.get(url)
+                print(response)
+                if response.status_code == 200:
+                    dataJson = response.json()
+
+                for trainer in dataJson:
+                    trainerIDs.append(trainer["id"])
+
+                randomtrainerid = random.choice(trainerIDs)
+                randomtrainer = {}
+
+                for trainer in dataJson:
+                    if int(trainer["id"]) == randomtrainerid:
+                        randomtrainer = trainer
+
+                print("Escogido", randomtrainer, sep="||")
 
                 # Comprobando si es Cliente o Administrador
                 if int(session.get("login_user_CA")) == 0:
@@ -93,8 +149,10 @@ class FilterRoutes:
                     session["date_tasksIDs"] = filteredTasksIDs
 
                     print(filteredTasks)
+
                     return render_template("todolist.html", userid=userid, username=username,
-                                           tasks=filteredTasks, date=date, categorias=categorias)
+                                           tasks=filteredTasks, date=date, categorias=categorias,
+                                           recomendacion=randomtip, trainer=randomtrainer)
 
                 elif int(session.get("login_user_CA")) == 1:
                     tasksCAll = logic.getAllTasksClients()
@@ -205,4 +263,4 @@ class FilterRoutes:
                     print(filteredTasksC, filteredTasksA, sep="|**|")
                     return render_template("dashboardToDo.html", userid=userid, username=username,
                                            tasksC=filteredTasksC, tasksA=filteredTasksA, date=date,
-                                           categorias=categorias)
+                                           categorias=categorias, recomendacion=randomtip, trainer=randomtrainer)

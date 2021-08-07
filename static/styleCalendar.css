@@ -6,7 +6,7 @@ body {
     line-height: 1.5;
     color: #495057;
     text-align: left;
-    background-color: #6200EA
+    background-color: #6200EA;
 }
 
 i {
@@ -172,6 +172,7 @@ i {
 
 .submitDate {
     padding-left: 12%;
+    margin-bottom: -4%;
 }
 
 #inputDate {
@@ -186,6 +187,7 @@ i {
 
 .btnToLogout {
     padding-left: 11.7%;
+    margin-bottom: 1%;
 }
 
 .adminsTitleTasks {
@@ -202,4 +204,47 @@ i {
 
 .filters {
     padding-left: 5%;
+}
+
+/*ESTILO DE LOS TIPS*/
+.containerTip {
+    float: right;
+    background-color: #fff;
+    width: 40%;
+    height: 50%;
+    margin-right: 5%;
+    margin: 0% 5% 5% 5%;
+}
+
+.containerTrainer {
+    float: left;
+    background-color: #fff;
+    width: 40%;
+    height: 50%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+h4#tituloTip {
+    margin: 3%;
+    color: #495057;
+}
+
+h5#nombreTip, h6#descTip {
+    margin: 0% 3% 3% 3%;
+    color: #EA0E0E;
+    font-weight: bold;
+}
+
+footer#footerTip {
+    margin: 0% 3% 3% 3%;
+    color: #EA0E0E;
+    text-align: right;
+    font-weight: bold;
+}
+
+.innerContainerTip {
+    background-color: #99EA0E;
+    margin: 3%;
+    padding: 2%;
 }
