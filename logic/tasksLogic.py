@@ -1,5 +1,6 @@
 from core.pyba_logic import PybaLogic
 
+
 class TaskLogic(PybaLogic):
     def __init__(self):
         super().__init__()
@@ -15,7 +16,7 @@ class TaskLogic(PybaLogic):
 
     def getAllTasksByUser(self, userid):
         database = self.createDatabaseObj()
-        sql = f"select * from carbonodb.tasks where userid={userid} order by priority asc;"
+        sql = f"select * from tasks where userid={userid} order by priority asc;"
         result = database.executeQuery(sql)
         return result
 
@@ -33,11 +34,11 @@ class TaskLogic(PybaLogic):
             "task": task,
             "priority": priority,
             "estado": estado,
-            "categoria":categoria
+            "categoria": categoria
         }
         sql = (
             f"""
-                INSERT INTO `carbonodb`.`tasks` (`userid`, `date`, `task`, `priority`, `estado`, `categoria`)
+                INSERT INTO `tasks` (`userid`, `date`, `task`, `priority`, `estado`, `categoria`)
                 VALUES
                 ('{tasks["userid"]}', 
                 '{tasks["date"]}', 
@@ -54,12 +55,12 @@ class TaskLogic(PybaLogic):
         database = self.createDatabaseObj()
         sql = (
             f"""
-            UPDATE `carbonodb`.`tasks` SET `estado` = 1 WHERE `taskid` = '{taskid}';
+            UPDATE `tasks` SET `estado` = 1 WHERE `taskid` = '{taskid}';
             """
         )
         rows = database.executeNonQueryRows(sql)
         return rows
-    
+
     def traerCategorias(self):
         database = self.createDatabaseObj()
         sql = f"SELECT DISTINCT categoria FROM tasks;"
@@ -68,7 +69,6 @@ class TaskLogic(PybaLogic):
 
     def deleteTask(self, taskid):
         database = self.createDatabaseObj()
-        sql = f"DELETE FROM `carbonodb`.`tasks` WHERE `taskid` = '{taskid}';"
+        sql = f"DELETE FROM `tasks` WHERE `taskid` = '{taskid}';"
         rows = database.executeNonQueryRows(sql)
         return rows
-

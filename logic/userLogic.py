@@ -1,5 +1,6 @@
 from core.pyba_logic import PybaLogic
 
+
 class UserLogic(PybaLogic):
     def __init__(self):
         super().__init__()
@@ -7,15 +8,15 @@ class UserLogic(PybaLogic):
     def insertUser(self, username, email, password, salt, admin):
         database = self.databaseObj
         user = {
-            "username":username,
-            "useremail":email,
-            "password":password,
-            "salt":salt,
+            "username": username,
+            "useremail": email,
+            "password": password,
+            "salt": salt,
             "admin": admin
         }
         sql = (
             f"""
-            INSERT INTO `carbonodb`.`user` (`username`, `email`, `password`,`salt`, `admin`, `creation`) 
+            INSERT INTO `user` (`username`, `email`, `password`,`salt`, `admin`, `creation`) 
             VALUES ('{user["username"]}', '{user["useremail"]}', '{user["password"]}', '{user["salt"]}',
             '{user["admin"]}', current_date());
             """
@@ -27,7 +28,7 @@ class UserLogic(PybaLogic):
         database = self.databaseObj
         sql = (f"""
             SELECT userid, username, email, password, salt, admin 
-            FROM carbonodb.user where `email` like '{email}';
+            FROM user where `email` like '{email}';
             """)
         result = database.executeQuery(sql)
         if len(result) > 0:
@@ -37,7 +38,7 @@ class UserLogic(PybaLogic):
 
     def getUsersClients(self):
         database = self.databaseObj
-        sql = (f"SELECT * FROM carbonodb.user where admin = 0;")
+        sql = (f"SELECT * FROM user where admin = 0;")
         result = database.executeQuery(sql)
         if len(result) > 0:
             return result
@@ -46,9 +47,6 @@ class UserLogic(PybaLogic):
 
     def deleteUserClient(self, id):
         database = self.databaseObj
-        sql = (f"DELETE FROM `carbonodb`.`user` WHERE userid={id};")
+        sql = (f"DELETE FROM `user` WHERE userid={id};")
         rows = database.executeNonQueryRows(sql)
         return rows
-
-
-    
