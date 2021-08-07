@@ -50,7 +50,8 @@
                         <div class="filters" style="display: none;" id="filtersInputs">
                             <!-- Select -->
                             <select class="custom-select-sm" size="1" style="opacity: 100;" name="filtroPrioridad">
-                                <option value="-" selected>Todas</option>
+                                <option value="-" selected>Prioridad</option>
+                                <option value="-">Todas</option>
                                 <option value="Alta">Alta</option>
                                 <option value="Media">Media</option>
                                 <option value="Baja">Baja</option>
@@ -59,7 +60,8 @@
 
                             <!-- Select -->
                             <select class="custom-select-sm" size="1" style="opacity: 100;" name="filtroCategoria">
-                                <option value="-" selected>Todas</option>
+                                <option value="-" selected>Categoría</option>
+                                <option value="-">Todas</option>
                                 {% if categorias %}
                                 {% for categoria in categorias %}
                                 <option value="{{categoria.categoria}}">{{categoria.categoria}}</option>
@@ -70,7 +72,8 @@
 
                             <!-- Select -->
                             <select class="custom-select-sm" size="1" style="opacity: 100;" name="filtroEstado">
-                                <option value="-" selected>Todas</option>
+                                <option value="-" selected>Estado</option>
+                                <option value="-">Todas</option>
                                 <option value="0">Activas</option>
                                 <option value="1">Inactivas</option>
                             </select>
@@ -424,38 +427,40 @@
     <div class="containerTip">
         <h4 id="tituloTip">Recomendación del día:</h4>
         {% if recomendacion %}
-            <div class="innerContainerTip">
-                <h5 id="nombreTip">{{recomendacion.nombre}}</h5>
-                <h6 id="descTip">{{recomendacion.descripcion}}</h6>
-                <footer id="footerTip">{{recomendacion.autor}} ({{recomendacion.fecha}})<br>
-                    <a href="{{recomendacion.enlace}}" target="_blank"><strong>Ver más</strong></a>
-                </footer>
-            </div>
+        <div class="innerContainerTip">
+            <h5 id="nombreTip">{{recomendacion.nombre}}</h5>
+            <h6 id="descTip">{{recomendacion.descripcion}}</h6>
+            <footer id="footerTip">{{recomendacion.autor}} ({{recomendacion.fecha}})<br>
+                <a href="{{recomendacion.enlace}}" target="_blank" id="link-trainer-recomendacion">
+                    <strong>Ver más</strong>
+                </a>
+            </footer>
+        </div>
         {% endif %}
         {% if failTip %}
-            <div class="innerContainerTip">
-                <h5 id="nombreTip">{{failTip}}</h5>
-            </div>
+        <div class="innerContainerTip">
+            <h5 id="nombreTip">{{failTip}}</h5>
+        </div>
         {% endif %}
     </div>
 
     <div class="containerTrainer">
         <h4 id="tituloTip">Trainer recomendado:</h4>
         {% if trainer %}
-            <div class="innerContainerTip">
-                <h5 id="nombreTip">{{trainer.nombre}}</h5>
-                <h6 id="descTip">{{trainer.descripcion}}</h6>
-                <footer id="footerTip">
-                    <a href="{{trainer.enlace}}" target="_blank">
-                        <strong>Contactarlo</strong>
-                    </a>
-                </footer>
-            </div>
+        <div class="innerContainerTip">
+            <h5 id="nombreTip">{{trainer.nombre}}</h5>
+            <h6 id="descTip">{{trainer.descripcion}}</h6>
+            <footer id="footerTip">
+                <a href="{{trainer.enlace}}" target="_blank" id="link-trainer-recomendacion">
+                    <strong>Contactarlo</strong>
+                </a>
+            </footer>
+        </div>
         {% endif %}
         {% if failTrainer %}
-            <div class="innerContainerTip">
-                <h5 id="nombreTip">{{failTrainer}}</h5>
-            </div>
+        <div class="innerContainerTip">
+            <h5 id="nombreTip">{{failTrainer}}</h5>
+        </div>
         {% endif %}
     </div>
 

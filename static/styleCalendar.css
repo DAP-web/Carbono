@@ -203,7 +203,7 @@ i {
 }
 
 .filters {
-    padding-left: 5%;
+    margin-left: 1%;
 }
 
 /*ESTILO DE LOS TIPS*/
@@ -247,4 +247,28 @@ footer#footerTip {
     background-color: #418bcf;
     margin: 3%;
     padding: 2%;
+}
+
+a#link-trainer-recomendacion{
+    cursor: pointer;
+    font-size: large;
+}
+
+a#link-trainer-recomendacion:link {
+  color: red;
+}
+
+/* visited link */
+a#link-trainer-recomendacion:visited {
+  color: green;
+}
+
+/* mouse over link */
+a#link-trainer-recomendacion:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a#link-trainer-recomendacion:active {
+  color: #FFDAB9;
 }
