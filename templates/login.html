@@ -28,8 +28,8 @@
         </h3>
 
         <form action="{{url_for('login')}}" method="POST">
-            <input type="email" placeholder="Correo Electrónico" name="email" required><br>
-            <input type="password" placeholder="Contraseña" name="passw" required><br>
+            <input type="email" placeholder="Correo Electrónico" name="email" autocomplete="off" required><br>
+            <input type="password" placeholder="Contraseña" name="passw" autocomplete="off" required><br>
             <div class="g-recaptcha" data-sitekey="6LdRpTIbAAAAAFxW88b00vZPoyt7Hd5c4RweFjaP"></div>
             <!--<input type="button" value="Iniciar Sesión"> -->
             <input type="submit" value="Iniciar Sesión">
