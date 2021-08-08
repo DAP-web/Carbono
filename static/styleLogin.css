@@ -158,3 +158,28 @@ body{
     color: #fff;
 	padding-left: 30%;
   }
+
+a#linkLogOR {
+	font-weight: bold;
+	font-size: large;
+}
+
+a#linkLogOR:link {
+  text-decoration: none;
+  color: #fff;
+}
+
+a#linkLogOR:visited {
+  text-decoration: none;
+  color: #18171c;
+}
+
+a#linkLogOR:hover {
+  text-decoration: underline;
+  color: #F5F5DC;
+}
+
+a#linkLogOR:active {
+  text-decoration: underline;
+  color: #0a0a0a;
+}
