@@ -1,78 +1,243 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+
+<html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/static/images/calendarImageLogo.png" />
-    <link rel="stylesheet" href="/static/styleIndex.css">
-    <title>Landing Page</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/assets/css/style.css">
+  <title>TO-DO CALENDAR</title>
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-md  fixed-top maine-menu">
+    <div class="container">
+      <button class="navbar-toggler ml-auto" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse">
+        <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span> </button>
+      <div id="my-nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item active"> <a class="nav-link" href="#">Home</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#about" tabindex="-1" aria-disabled="true">About</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#activity" tabindex="-1" aria-disabled="true">Activity</a>
+          </li>
+          <li class="nav-item"> <a class="nav-link" href="#testimonial" tabindex="-1"
+              aria-disabled="true">Testimonial</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#contact" tabindex="-1" aria-disabled="true">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <section class="sec">
-        <header>
-            <ul class="navigation">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/beneficios">Beneficios</a></li>
-                <li><a href="/acerca">Acerca de nosotros</a></li>
-                <li><a href="/contactanos">Deseas contribuir?</a></li>
-            </ul>
-        </header>
-
-        <!-- <div id="containerBeneficios">
-            <div style="display: none;" id="beneficios" name="w3includes"
-	            w3-include-html="/beneficios"></div>
+  <div class="container-fluid fh5co-home-banner">
+    <div class="card"> <img class="card-img" src="/static/assets/img/banner.jpg" alt="">
+      <div class="card-img-overlay">
+        <div class="center-text">
+          <h2 class="card-title">Schedule your calendar with us</h2>
+          <a href="/login" class="btn">
+            <svg width="201" height="51" viewBox="0 0 201 51">
+              <defs>
+                <style>
+                  .cls-1 {
+                    fill: none;
+                    stroke-width: 1px;
+                    stroke: url(#linear-gradient);
+                  }
+                </style>
+                <linearGradient id="linear-gradient" x1="140.508" y1="50.5" x2="60.492" y2="0.5"
+                  gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#e90e65" />
+                  <stop offset="1" stop-color="#fff" />
+                </linearGradient>
+              </defs>
+              <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-1" x="0.5" y="0.5" width="200"
+                height="50" rx="25" ry="25" />
+            </svg>
+            Start</a>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div id="containerAcerca">
-            <div style="display: none;" id="acerca1" name="w3includes"
-	            w3-include-html="/acerca"></div>
+  <div class="container-fluid fh5co-two-img">
+    <div class="row">
+      <div class="col-sm-6 pr-0 pl-0">
+        <div class="card"> <img class="card-img" src="/static/assets/img/girl1.jpg" alt="">
+          <div class="card-img-overlay"> </div>
         </div>
+      </div>
+      <div class="col-sm-6 pr-0 pl-0">
+        <div class="card"> <img class="card-img" src="/static/assets/img/girl2.jpg" alt="">
+          <div class="card-img-overlay"> </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div id="containerContacto">
-            <div style="display: none;" id="contactanos1" name="w3includes"
-	            w3-include-html="/contactanos"></div>
-        </div> -->
-
-        <div class="content">
-            <div class="textBox">
-                <h2>TO DO LIST<br><span>Calendar</span></h2>
-                <a href="/login">Ver el calendario</a>
+  <div class="container-fluid fh5co-recent-work">
+    <div class="container contact-pop">
+      <div class="row">
+        <div class="col-md-6  pr-0">
+          <div class="card"> <img class="card-img w-100" src="/static/assets/img/girl3.jpg" alt="">
+            <div class="card-img-overlay"> </div>
+          </div>
+        </div>
+        <div class="col-md-6 pl-0" id="about">
+          <div class="content">
+            <h3>We are Carbono</h3>
+            <h4>The team behind the calendar</h4>
+            <hr />
+            <p>We have been working together since 2020. And it has been a blast. We have a great team that awaits you.
+              We would like you to start having the Carbono experience.</p>
+            <a href="/login" class="btn">START</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container recent" id="activity">
+      <div class="row">
+        <h2>Recent works</h2>
+        <div class="owl-carousel owl-carousel2 owl-theme">
+          <div>
+            <div class="card"> <img class="card-img" src="/static/assets/img/recent-img1.jpg" alt="">
+              <div class="card-img-overlay"> <a href="https://github.com/DAP-web/FreyaBD" target="_blank"><img
+                    src="/static/assets/img/heart.png" class="heart" alt="heart icon"></a>
+                <div class="bottom-text">
+                  <h5 class="card-title">Freya</h5>
+                  <p class="card-text">Java, HTML, Transact SQL</p>
+                </div>
+              </div>
             </div>
-
+          </div>
+          <div>
+            <div class="card"> <img class="card-img" src="/static/assets/img/recent-img2.jpg" alt="">
+              <div class="card-img-overlay"> <a href="https://github.com/DAP-web/AirbnbProyect" target="_blank"><img
+                    src="/static/assets/img/heart.png" class="heart" alt="heart icon"></a>
+                <div class="bottom-text">
+                  <h5 class="card-title">Airbnb</h5>
+                  <p class="card-text">Python</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card"> <img class="card-img" src="/static/assets/img/recent-img3.jpg" alt="">
+              <div class="card-img-overlay"> <a href="https://github.com/DAP-web/API-Creator-Helio" target="_blank"><img
+                    src="/static/assets/img/heart.png" class="heart" alt="heart icon"></a>
+                <div class="bottom-text">
+                  <h5 class="card-title">Rest API Project</h5>
+                  <p class="card-text">Python</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card"> <img class="card-img" src="/static/assets/img/recent-img4.jpg" alt="">
+              <div class="card-img-overlay"> <a href="https://github.com/DAP-web/Proyecto-Carbono06"
+                  target="_blank"><img src="/static/assets/img/heart.png" class="heart" alt="heart icon"></a>
+                <div class="bottom-text">
+                  <h5 class="card-title">ToDoList - Previous Version</h5>
+                  <p class="card-text">Javascript, HTML, CSS y Python</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
-        <div class="foto">
-            <h2><img src="/static/images/calendario.jpg" class="calendario" alt="calendario" style="width:17em">
-            </h2>
+  <div class="container-fluid fh5co-about-me" id="testimonial">
+    <div id="my-carousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="card"> <img class="card-img d-block w-100" src="/static/assets/img/about-me-img.jpg" alt="">
+          <div class="card-img-overlay">
+            <h2>People say about us</h2>
+          </div>
         </div>
+        <div class="carousel-item">
+          <div class="carousel-caption d-md-block"> <img src="/static/assets/img/quote-icon.png" alt="">
+            <p>They are an amazing team to work with. I would absolutely recommend.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-caption d-md-block"> <img src="/static/assets/img/quote-icon.png" alt="">
+            <p>They have been a very helpful resource to achieve our results.</p>
+          </div>
+        </div>
+        <div class="carousel-item active">
+          <div class="carousel-caption d-md-block"> <img src="/static/assets/img/quote-icon.png" alt="">
+            <p>It has been an incredible experience to increase our productivity with their help.</p>
+          </div>
+        </div>
+      </div>
+      <ol class="carousel-indicators">
+        <li data-target="#my-carousel" data-slide-to="0"> <img src="/static/assets/img/about-me-img1.png" alt="">
+          <span>Marcos López</span>
+        </li>
+        <li class="active" data-target="#my-carousel" data-slide-to="1" aria-current="location"> <img
+            src="/static/assets/img/about-me-img2.png" alt=""> <span>Mia Mendiola</span> </li>
+        <li data-target="#my-carousel" data-slide-to="2"> <img src="/static/assets/img/about-me-img3.png" alt="">
+          <span>Sebastian Sosa</span>
+        </li>
+      </ol>
+    </div>
+  </div>
 
-        <ul class="thumb">
-            <li><img src="/static/images/Productividad.png"
-                    onclick="imgSlider('productividad.png');changeBgColor('#174972')" alt="">
-            </li>
-            <li><img src="/static/images/Reloj.png" onclick="imgSlider('reloj.png');changeBgColor('#174972')" alt="">
-            </li>
-            <li><img src="/static/images/paginas.png" onclick="imgSlider('paginas.png');changeBgColor('#174972')"
-                    alt="">
-            </li>
+  <div class="container-fluid fh5co-insta-feed activity">
+    <div class="container recent">
+      <h2 class="text-center d-block">Find us on social media</h2>
+      <div class="row social-links">
+        <ul class="nav mx-auto">
+          <!-- <li class="nav-item"> <a class="nav-link" href="https://www.facebook.com/fh5co" target="_blank"><img
+                src="/static/assets/img/facebook.png" alt=""></a> </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="#"><img src="/static/assets/img/facebook.png" alt=""></a>
+          </li>
+          <!-- <li class="nav-item"> <a class="nav-link" href="https://twitter.com/fh5co" target="_blank"><img
+                src="/static/assets/img/twitter.png" alt=""></a> </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="#"><img src="/static/assets/img/twitter.png" alt=""></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><img src="/static/assets/img/pinterest.png" alt=""></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><img src="/static/assets/img/google-plus.png" alt=""></a>
+          </li>
         </ul>
+      </div>
+    </div>
+  </div>
 
-        <ul class="sci">
-            <li><a href=""><img src="/static/images/facebook.png" alt=""></a></li>
-            <li><a href=""><img src="/static/images/twitter.png" alt=""></a></li>
-            <li><a href=""><img src="/static/images/instagram.png" alt=""></a></li>
-        </ul>
+  <footer class="container-fluid p-0 pr-0">
+    <div class="col-md-6 content-us"></div>
+    <div class="contact-form" id="contact">
+      <h3 class="text-uppercase">Contact us</h3>
+      <input type="text" class="form-control" placeholder="Your Name">
+      <input type="text" class="form-control" placeholder="Your Email">
+      <textarea class="form-control" placeholder="Your Message"></textarea>
+      <button type="submit"
+        onclick="alert('Muchas gracias por tu mensaje. Nos pondremos en contacto devuelta contigo. Esto es por el momento demostrativo.')">
+        Send
+      </button>
+    </div>
+    </div>
 
-    </section>
+    <div class="copy pt-4 pb-4">
+      <p><a href="https://freehtml5.co/" target="_blank"> &copy; 2021 Carbono</a> &nbsp; | &nbsp; Design by <a
+          href="https://freehtml5.co/" target="_blank">freehtml5.co</a> &nbsp;</p>
+    </div>
+  </footer>
 
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script src="/static/scriptIndex.js"></script>
-    <!-- <script src="/static/preLoadUsers.js"></script> -->
+  <script src="/static/assets/js/jquery-3.3.1.slim.min.js"></script>
+  <script src="/static/assets/js/popper.min.js"></script>
+  <script src="/static/assets/js/bootstrap.min.js"></script>
+  <script src="/static/assets/js/owl.carousel.min.js"></script>
+  <script src="/static/assets/js/main.js"></script>
+
 </body>
 
 </html>

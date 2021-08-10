@@ -98,3 +98,8 @@ text-decoration:none;
     background-color: #3f6ad8;
     border-color: #3f6ad8
 }
+
+div.readyButton {
+    margin-left: 21%;
+    margin-bottom: 1%;
+}

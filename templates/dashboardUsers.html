@@ -20,6 +20,10 @@
 <body>
     <h1 id="saludo">Welcome {{username}}</h1>
     <hr>
+    <div class="readyButton">
+        <button class="btn btn-primary" onclick="readyToRemove()" id="botonreadyP1">¡Estoy listo para eliminar
+            usuarios!</button>
+    </div>
     <div class="container bootstrap snippets bootdey">
         <div class="row">
             <div class="col-lg-12">
@@ -67,8 +71,8 @@
                                                     </span>
                                                 </a> -->
                                                 <input type="submit" name="user{{user.userid}}"
-                                                    class="table-link danger fa-stack fa fa-square fa-trash-o fa-inverse"
-                                                    value="🗑" style="background-color: red;">
+                                                    class="table-link danger fa-stack fa fa-square fa-trash-o fa-inverse readyP1"
+                                                    value="🗑" style="background-color: red;" disabled>
                                                 </input>
                                             </td>
                                         </tr>
@@ -90,6 +94,7 @@
 
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript"></script>
+    <script src="/static/usersWarning.js"></script>
 </body>
 
 </html>
